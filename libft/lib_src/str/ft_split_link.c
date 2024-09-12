@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_link.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 00:43:14 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/09/10 17:17:50 by njeanbou         ###   ########.fr       */
+/*   Created: 2024/09/10 01:28:01 by njeanbou          #+#    #+#             */
+/*   Updated: 2024/09/10 01:32:13 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char	**ft_split_words(char const *s, char c, char **dest, int num_words)
 	{
 		while (s[i] && s[i] == c)
 			i++;
-		while (s[i] && s[i] != c)
+		while (s[i] && s[i] != c && s[i] != '\n')
 		{
 			i++;
 			word_len++;
@@ -84,11 +84,11 @@ static char	**ft_split_words(char const *s, char c, char **dest, int num_words)
 		word_len = 0;
 		word++;
 	}
-	dest[word] = NULL;
+	dest[word] = 0;
 	return (dest);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_link(char const *s, char c)
 {
 	char			**dest;
 	unsigned int	num_words;

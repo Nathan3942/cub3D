@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ichpakov <ichpakov@student.42.fr>          +#+  +:+       +#+         #
+#    By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 14:51:41 by ichpakov          #+#    #+#              #
-#    Updated: 2024/04/24 04:01:27 by ichpakov         ###   ########.fr        #
+#    Updated: 2024/09/10 01:31:20 by njeanbou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRC_PROJ =	#get_next_line.c
 SRC_STR =	ft_toupper.c		ft_strchr.c			ft_split.c			ft_tolower.c		ft_substr.c		\
 			ft_strdup.c			ft_striteri.c		ft_strjoin.c		ft_strlcat.c		ft_strlcpy.c	\
 			ft_strlen.c			ft_strmapi.c		ft_strncmp.c		ft_strtrim.c		ft_strnstr.c	\
-			ft_strstr.c			ft_strcmp.c			ft_ischarset.c		ft_int_strchr.c		ft_strnjoin.c
+			ft_strstr.c			ft_strcmp.c			ft_ischarset.c		ft_int_strchr.c		ft_strnjoin.c	\
+			ft_strequal.c		ft_split_link.c
 
 SRC_CONV =	ft_atoi.c			ft_itoa.c
 

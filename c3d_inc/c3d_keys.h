@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 04:13:38 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/09/05 15:48:30 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/09/09 18:23:46 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,11 @@
 # define K_LEFT 123
 # define K_DOWN 125
 # define K_RIGHT 124
+
+// Size window & unit
+# define W_HEIGHT 800
+# define W_WIDTH 600
+# define U_HEIGHT 50
+# define U_WIDTH 50
 
 #endif

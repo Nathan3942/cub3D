@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 18:14:43 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/09/06 15:17:49 by njeanbou         ###   ########.fr       */
+/*   Created: 2024/09/10 02:28:39 by njeanbou          #+#    #+#             */
+/*   Updated: 2024/09/12 05:09:43 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../lib_includes/libft.h"
+#include "../c3d_inc/cub3d.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char first_num(char *buffer)
 {
-	char	*new;
-	int		i;
-	int		j;
+	int i;
 
+	if (buffer[0] != ' ')
+		return (buffer[0]);
 	i = 0;
-	j = 0;
-	if (!s1 || !s2)
-		return (s2);
-	new = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!new)
-		return (NULL);
-	while (s1[i])
-	{
-		new[i] = s1[i];
+	while (buffer[i] == ' ')
 		i++;
-	}
-	while (s2[j] != '\0')
-	{
-		new[i] = s2[j];
-		i++;
-		j++;
-	}
-	new[i] = '\0';
-	return (new);
+	return (buffer[i]);
 }
+
+

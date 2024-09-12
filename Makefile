@@ -6,7 +6,7 @@
 #    By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 04:13:09 by ichpakov          #+#    #+#              #
-#    Updated: 2024/09/05 15:40:53 by njeanbou         ###   ########.fr        #
+#    Updated: 2024/09/09 18:11:30 by njeanbou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBMLX = mlx/libmlx.a
 #		ALL FILES
 #//////////////////////////////////////////////////////////////////////////////
 
-SRCS =	c3d_src/cub3d.c			\
+SRCS =	$(wildcard c3d_src/*.c) #c3d_src/cub3d.c			\
 
 HEAD =	c3d_inc/cub3d.h			c3d_inc/c3d_keys.h
 
@@ -29,7 +29,7 @@ HEAD =	c3d_inc/cub3d.h			c3d_inc/c3d_keys.h
 #//////////////////////////////////////////////////////////////////////////////
 
 CC = gcc
-CF = -Wall -Werror -Wextra -g -fsanitize=address -static-libasan
+CF = -fsanitize=address -static-libasan #-Wall -Werror -Wextra -g
 SL = -Imlx -Imlx_linux -lXext -lX11 -lm -lz
 CI = -I ./c3d_inc/
 

@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 18:14:43 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/09/06 15:17:49 by njeanbou         ###   ########.fr       */
+/*   Created: 2024/09/06 15:29:31 by njeanbou          #+#    #+#             */
+/*   Updated: 2024/09/06 15:37:14 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../lib_includes/libft.h"
+#include "../c3d_inc/cub3d.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+void	free_all(t_data **data)
 {
-	char	*new;
-	int		i;
-	int		j;
+	ft_free_tab((*data)->map);
+	free((*data)->txt_ceiling);
+	free((*data)->txt_ground);
+	free((*data)->txt_north);
+	free((*data)->txt_south);
+	free((*data)->txt_east);
+	free((*data)->txt_west);
+	free((*data));
+}
+
+void	ft_free_tab(char **tab)
+{
+	int	i;
 
 	i = 0;
-	j = 0;
-	if (!s1 || !s2)
-		return (s2);
-	new = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!new)
-		return (NULL);
-	while (s1[i])
+	while (tab[i] != NULL)
 	{
-		new[i] = s1[i];
+		free(tab[i]);
 		i++;
 	}
-	while (s2[j] != '\0')
-	{
-		new[i] = s2[j];
-		i++;
-		j++;
-	}
-	new[i] = '\0';
-	return (new);
+	free(tab);
 }
