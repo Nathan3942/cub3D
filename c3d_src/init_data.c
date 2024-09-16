@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:30:46 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/09/12 09:50:48 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:05:29 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	copymap(t_data **data)
 	int	j;
 
 	j = 1;
-	(*data)->mapbis = (char **)malloc(((*data)->m_hei + 2) * sizeof(char *));
+	(*data)->mapbis = (char **)malloc(((*data)->m_hei + 3) * sizeof(char *));
 	(*data)->mapbis[0] = (char *)malloc (((*data)->m_wid + 3) * sizeof(char));
 	i = 0;
 	while ((*data)->map[0][i] != '\0')
@@ -94,6 +94,13 @@ void	copymap(t_data **data)
 		(*data)->mapbis[j][i + 1] = '\0';
 		j++;
 	}
+	printf("%d\n", j);
+	(*data)->mapbis[j] = (char *)malloc (((*data)->m_wid + 3) * sizeof(char));
+	i = 0;
+	while (i < (*data)->m_wid + 2)
+		(*data)->mapbis[j][i++] = '0';
+	(*data)->mapbis[j][i] = '\0';
+	j++;
 	(*data)->mapbis[j] = NULL;
 }
 
@@ -130,6 +137,11 @@ void    init_data(char *av, t_data **data, char *buffer)
 	(*data)->hei = 50;
 	(*data)->mlx_ptr = mlx_init();
 	fd = open(av, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("Erorr : file does not exist\n", 1);
+		exit(1);
+	}
 	buffer = gnl(fd, buffer);
 	buf = ft_split_link(buffer, ' ');		
 	while (buffer != NULL && ft_isdigit(first_num(buffer)) != 1)

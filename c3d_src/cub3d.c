@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 04:13:38 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/09/12 08:00:20 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:39:17 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int    key_hook(int keycode, t_data **data)
 {
-	if (keycode == 53)
+	printf("%d\n", keycode);
+	if (keycode == 65307)
 	{
 		mlx_destroy_window((*data)->mlx_ptr, (*data)->win_ptr);
 		ft_putstr_fd("EXIT", 1);
@@ -49,6 +50,7 @@ int main(int ac, char **av)
 	check_map(&data);
 	creat_map(&data);
 	mlx_hook(data->win_ptr, 17, 0, exit_1, &data);
+	mlx_hook(data->win_ptr, 2, 1L<<0, key_hook, &data);
 	mlx_loop(data->mlx_ptr);
 	free_all(&data);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:55:41 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/09/12 10:05:55 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:58:59 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,189 +55,110 @@ void	check_char(t_data **data)
 	}
 }
 
-bool	check_haud(t_data **data, int *y, int *x)
-{
-	printf("%d, %d : %c\n", *y, *x, (*data)->map[*y][*x]);
-	if ((*data)->map[*y][*x + 1] == '\0')
-		return (true);
-	if((*data)->map[*y][*x + 1] != '\0' && (*data)->map[*y][*x + 1] == '1')
-	{
-		(*x)++;
-		return (check_haud(data, y, x));
-	}
-	if((*data)->map[*y + 1] != NULL && (*data)->map[*y + 1][*x] == '1')
-	{
-		(*y)++;
-		return (check_haud(data, y, x));
-	}
-	if (*y > 0 && (*data)->map[*y - 1][*x] == '1')
-	{
-		(*y)--;
-		return (check_haud(data, y, x));
-	}
-	if (*x > 0 && (*data)->map[*y][*x - 1] == '1')
-	{
-		(*x)--;
-		return (check_haud(data, y, x));
-	}
-	return (false);
-}
-
 void	print_limit(t_data **data)
 {
 	int y;
 	int	x;
 
 	y = 0;
-	while ((*data)->map[y] != NULL)
+	while ((*data)->mapbis[y] != NULL)
 	{
 		x = 0;
-		while ((*data)->map[y][x] != '\0')
+		while ((*data)->mapbis[y][x] != '\0')
 			x++;
 		y++;
 	}
 	printf("Limit map : y %d, x %d\n", y, x);
 }
 
-// char	**copymap(t_data *data)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	**copy_map;
+void	ft_print_mapp(char **map)
+{
+	int i;
 
-// 	j = 0;
-// 	copy_map = (char **)malloc((data->m_hei + 1) * sizeof(char *));
-// 	while (data->map[j])
-// 	{
-// 		i = 0;
-// 		copy_map[j] = (char *)malloc ((data->m_wid + 1) * sizeof(char));
-// 		while (data->map[j][i])
-// 		{
-// 			copy_map[j][i] = data->map[j][i];
-// 			i++;
-// 		}
-// 		j++;
-// 	}
-// 	return (copy_map);
-// }
+	i = 0;
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+	printf("\n\n");
+}
 
-// bool	check_right(t_data **data, int y, int x, int *i)
-// {
-// 	bool	result;
-
-// 	print_limit(data);
-// 	printf("y %d, x %d\n", y, x);
-// 	// printf("%d, %d : %c\n", *y, *x, (*data)->map[*y][*x]);
-// 	if (*i > 20 && (*data)->mapbis[y][x] == 'F')
-// 		return (true);
-// 	if (y <= 0 || x <= 0)
-//         return (false);
-// 	if ((*data)->mapbis[y] == NULL || (*data)->mapbis[y][x] == '\0' || (*data)->mapbis[y][x] != '1')
-// 		return (false);
-// 	(*i)++;
-// 	(*data)->mapbis[y][x] = '0';
-// 	result = (check_right(data, y + 1, x, i) || check_right(data, y, x + 1, i)
-// 		|| check_right(data, y, x - 1, i) || check_right(data, y - 1, x, i));
-// 	return (result);
-// }
-
-// char	**copy_map(t_data **data)
-// {
-// 	int	i;
-// 	int	j;
-// 	char	**dest;
-
-// 	j = 1;
-// 	dest = (char **)malloc(((*data)->m_hei + 2) * sizeof(char *));
-// 	dest[0] = (char *)malloc (((*data)->m_wid + 2) * sizeof(char));
-// 	i = 0;
-// 	while ((*data)->map[0][i] != '\0')
-// 		dest[0][i++] = '0';
-// 	dest[0][i++] = '0';
-// 	dest[0][i] = '\0';
-// 	while ((*data)->map[j - 1] != NULL)
-// 	{
-// 		i = 0;
-// 		dest[j] = (char *)malloc (((*data)->m_wid + 2) * sizeof(char));
-// 		while ((*data)->map[j - 1][i] != '\0')
-// 		{
-// 			dest[j][i] = (*data)->map[j - 1][i];
-// 			i++;
-// 		}
-// 		dest[j][i] = '0';
-// 		dest[j][i + 1] = '\0';
-// 		j++;
-// 	}
-// 	dest[j] = NULL;
-// }
-
-// char	**copymappp(t_data **data)
-// {
-// 	int	i;
-// 	int	j;
-// 	char	**mapbis;
-
-// 	j = 0;
-// 	mapbis = (char **)malloc(((*data)->m_hei + 1) * sizeof(char *));
-// 	while ((*data)->map[j] != NULL)
-// 	{
-// 		i = 0;
-// 		mapbis[j] = (char *)malloc (((*data)->m_wid + 2) * sizeof(char));
-// 		while ((*data)->mapbis[j][i] != '\0')
-// 		{
-// 			mapbis[j][i] = (*data)->mapbis[j][i];
-// 			i++;
-// 		}
-// 		mapbis[j][i] = '\0';
-// 		j++;
-// 	}
-// 	mapbis[j] = NULL;
-// 	return (mapbis);
-// }
-
-int check_border(char **mapbis, int y, int x, int *i)
+int check_border(char **mapbis, int y, int x, int i)
 {
     int res;
 
-    // Affichage pour débogage
-    printf("y %d, x %d, i %d, map %c 		:3\n", y, x, *i, mapbis[y][x]);
-
-    // Vérifiez les limites de la carte et les conditions
-    if (*i != 0)
+    //printf("y %d, x %d, i %d, map %c 		:3\n", y, x, i, mapbis[y][x]);
+    if (i != 0)
 	{
-		if (mapbis[y][x] == '2')
-			return (0);	
-		if (mapbis[y][x] == 'F' && *i > 30)
+		if (mapbis[y][x] == 'F' && i > 2)
 			return (1);
 		if ((y <= 0 || x <= 0 || mapbis[y][x + 1] == '\0'
-			|| mapbis[y + 1] == NULL || mapbis[y][x] != '1'))
+			|| mapbis[y] == NULL || mapbis[y][x] != '1' || mapbis[y][x] == '2'))
 		{
-			printf("y %d, x %d, i %d, map %c :(\n", y, x, *i, mapbis[y][x]);
-			return 0;  // Carte non fermée
+			//printf("y %d, x %d, i %d, map %c :(\n", y, x, i, mapbis[y][x]);
+			return (0);
 		}
 	}
-	(*i)++;
-	if (*i == 1 || mapbis[y][x] == '1')
+	(i)++;
+	if (i == 1 || mapbis[y][x] == '1')
 	{
 		if (mapbis[y][x] != 'F')
 			mapbis[y][x] = '2';
-    	res = (check_border(mapbis, y, x + 1, i) || check_border(mapbis, y + 1, x, i)
+		res = (check_border(mapbis, y, x + 1, i) || check_border(mapbis, y + 1, x, i)
            || check_border(mapbis, y, x - 1, i) || check_border(mapbis, y - 1, x, i));
-		return res;
+		return (res);
 	}
 	return (0);
+}
+
+void	search_pos_player(t_data **data, int *y, int *x)
+{
+	while ((*data)->mapbis[*y] != NULL)
+	{
+		(*x) = 0;
+		while ((*data)->mapbis[*y][*x] != '\0')
+		{
+			if ((*data)->mapbis[*y][*x] == 'N' || (*data)->mapbis[*y][*x] == 'S'
+				|| (*data)->mapbis[*y][*x] == 'E' || (*data)->mapbis[*y][*x] == 'W')
+				return ;
+			(*x)++;
+		}
+		(*y)++;
+	}
+}
+
+int	check_perso(t_data **data, int y, int x)
+{
+	int	res;
+
+	print_limit(data);
+	printf("y %d, x %d, map %c 		:3\n", y, x, (*data)->mapbis[y][x]);
+	if ((*data)->mapbis[y][x] == '1' || (*data)->mapbis[y][x] == '3')
+		return (0);
+	if (y <= 0 || x <= 0 || y >= (*data)->m_hei + 1 || x >= (*data)->m_wid + 1)
+		return (1);
+	(*data)->mapbis[y][x] = '3';
+	res = (check_perso(data, y + 1, x) || check_perso(data, y, x + 1)
+			|| check_perso(data, y - 1, x) || check_perso(data, y, x - 1));
+	return (res);
 }
 
 bool	map_close(t_data **data, int *y, int *x, int dep[2])
 {
 	int		i;
+	int		pos_x;
+	int		pos_y;
 
 	i = 0;
+	pos_y = 0;
+	pos_x = 0;
 	(*data)->mapbis[*y][*x] = 'F';
-	if (check_border((*data)->mapbis, *y, *x, &i) == 1)
-		printf("true\n");
+	search_pos_player(data, &pos_y, &pos_x);
+	if (check_perso(data, pos_y, pos_x) == 0 && check_border((*data)->mapbis, *y, *x, i) == 1)
+		return (true);
 	else
-		printf("false\n");
+		return (false);
 	print_para(*data);
 	
 }
@@ -410,6 +331,36 @@ void    check_map(t_data **data)
 // 		printf("haud\n");
 // 		(*y)++;
 // 	    return map_close(data, y, x, dep);
+// 	}
+// 	return (false);
+// }
+
+
+
+// bool	check_haud(t_data **data, int *y, int *x)
+// {
+// 	printf("%d, %d : %c\n", *y, *x, (*data)->map[*y][*x]);
+// 	if ((*data)->map[*y][*x + 1] == '\0')
+// 		return (true);
+// 	if((*data)->map[*y][*x + 1] != '\0' && (*data)->map[*y][*x + 1] == '1')
+// 	{
+// 		(*x)++;
+// 		return (check_haud(data, y, x));
+// 	}
+// 	if((*data)->map[*y + 1] != NULL && (*data)->map[*y + 1][*x] == '1')
+// 	{
+// 		(*y)++;
+// 		return (check_haud(data, y, x));
+// 	}
+// 	if (*y > 0 && (*data)->map[*y - 1][*x] == '1')
+// 	{
+// 		(*y)--;
+// 		return (check_haud(data, y, x));
+// 	}
+// 	if (*x > 0 && (*data)->map[*y][*x - 1] == '1')
+// 	{
+// 		(*x)--;
+// 		return (check_haud(data, y, x));
 // 	}
 // 	return (false);
 // }
