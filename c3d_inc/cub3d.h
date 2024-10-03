@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 03:24:01 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/10/02 20:51:58 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/03 05:38:37 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "../mlx/mlx.h"
 #include "../libft/lib_includes/libft.h"
 #include "c3d_keys.h"
+#include <X11/Xlib.h>
 
 /*/////////////////////////////////////////////////////////////////////////////
 		STRUCTURES TYPEDEFS
@@ -49,14 +50,26 @@ typedef struct s_data
 	t_texture	*txt_south;
 	t_texture	*txt_west;
 	t_texture	*txt_east;
+	t_texture	*txt_door;
 	unsigned int	txt_ground;
 	unsigned int	txt_ceiling;
+	//minimap
+	void	*mini_map;
+	char	*mini_data;
+	int		mini_w;
+	int		mini_h;
+	int		m_bite_per_pixel;
+	int		m_size_line;
+	int		m_endian;
+
 	//map
 	char	**map;
 	char	**mapbis;
 	int		m_wid;
 	int		m_hei;
 	//state
+	int		W_hei;
+	int		w_wid;
 	int		hei;
 	int		wid;
 	double	player_x;
@@ -72,6 +85,8 @@ typedef struct s_data
 	int		size_line;
 	int		endian;
 	int		index_img;
+
+	int		x_mouse;
 
 }	t_data;
 
@@ -137,5 +152,8 @@ char	first_num(char *buffer);
 //check_map
 void    check_cub(char *av);
 void    check_map(t_data **data);
+
+//mini_map
+void    mini_map(t_data **data);
 
 #endif

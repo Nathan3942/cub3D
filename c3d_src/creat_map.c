@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 17:28:38 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/09/10 14:53:47 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/03 05:08:33 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // 	mlx_put_image_to_window((*data)->mlx_ptr, (*data)->win_ptr, (*data)->img_ptr, 0, 0);
 // }
 
-void	creat_map(t_data **data)
+void	creat_minimap(t_data **data)
 {
 	int	x;
 	int	y;

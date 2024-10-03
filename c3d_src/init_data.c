@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:30:46 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/02 21:00:42 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:00:53 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,9 @@ void	extract_texture(t_data **data, char **buf)
 	{
 		(*data)->txt_north = (t_texture *)malloc (sizeof(t_texture));
 		(*data)->txt_north->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr, buf[1], &(*data)->wid, &(*data)->hei);
+		//a faire pour tout avec un exit clean
+		if (!(*data)->txt_north->txt_img)
+			return ;
 		(*data)->txt_north->txt_data = mlx_get_data_addr((*data)->txt_north->txt_img, &(*data)->txt_north->bits_per_pixel, &(*data)->txt_north->size_line, &(*data)->txt_north->endianl);
 	}
 	else if (ft_strequal(buf[0], "SO") == 0)
@@ -162,6 +165,12 @@ void	extract_texture(t_data **data, char **buf)
 		(*data)->txt_east = (t_texture *)malloc (sizeof(t_texture));
 		(*data)->txt_east->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr, buf[1], &(*data)->wid, &(*data)->hei);
 		(*data)->txt_east->txt_data = mlx_get_data_addr((*data)->txt_east->txt_img, &(*data)->txt_east->bits_per_pixel, &(*data)->txt_east->size_line, &(*data)->txt_east->endianl);
+	}
+	else if (ft_strequal(buf[0], "DO") == 0)
+	{
+		(*data)->txt_door = (t_texture *)malloc (sizeof(t_texture));
+		(*data)->txt_door->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr, buf[1], &(*data)->wid, &(*data)->hei);
+		(*data)->txt_door->txt_data = mlx_get_data_addr((*data)->txt_door->txt_img, &(*data)->txt_door->bits_per_pixel, &(*data)->txt_door->size_line, &(*data)->txt_door->endianl);
 	}
 	extract_color(data, buf);
 }
@@ -257,16 +266,30 @@ void	calculate_pos_player(t_data **data)
 	}
 }
 
+void	calculate_screen(t_data **data)
+{
+	Display	*disp;
+	Screen	*screen;
+
+	disp = XOpenDisplay(NULL);
+	screen = DefaultScreenOfDisplay(disp);
+	(*data)->w_wid = screen->width;
+	(*data)->W_hei = screen->height;
+	XCloseDisplay(disp);
+}
+
 
 void    init_data(char *av, t_data **data, char *buffer)
 {
 	check_cub(av);
 	(*data)->mlx_ptr = mlx_init();
+	calculate_screen(data);
 	(*data)->win_ptr = mlx_new_window((*data)->mlx_ptr, W_WIDTH, W_HEIGHT, "Cub3d des gros BOOOOWGOS");
 	(*data)->index_img = 3;
 
-	(*data)->wid = 50;
-	(*data)->hei = 50;
+	(*data)->wid = 500;
+	(*data)->hei = 500;
+	(*data)->x_mouse = -1;
 
 	// (*data)->player_x = 13;
 	// (*data)->player_y = 1.5;
