@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:30:46 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/09/16 15:05:29 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:00:42 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	calculate_window(t_data **data)
 			x_tmp = x;
 		y++;
 	}
-	(*data)->w_hei = y * U_HEIGHT;
-	(*data)->w_wei = x_tmp * U_WIDTH;
 	(*data)->m_wid = x_tmp;
 	(*data)->m_hei = y;
 }
@@ -94,7 +92,7 @@ void	copymap(t_data **data)
 		(*data)->mapbis[j][i + 1] = '\0';
 		j++;
 	}
-	printf("%d\n", j);
+	// printf("%d\n", j);
 	(*data)->mapbis[j] = (char *)malloc (((*data)->m_wid + 3) * sizeof(char));
 	i = 0;
 	while (i < (*data)->m_wid + 2)
@@ -104,38 +102,75 @@ void	copymap(t_data **data)
 	(*data)->mapbis[j] = NULL;
 }
 
-// void	copymap(t_data **data)
-// {
-// 	int	i;
-// 	int	j;
 
-// 	j = 0;
-// 	(*data)->mapbis = (char **)malloc(((*data)->m_hei + 1) * sizeof(char *));
-// 	while ((*data)->map[j] != NULL)
-// 	{
-// 		i = 0;
-// 		(*data)->mapbis[j] = (char *)malloc (((*data)->m_wid + 2) * sizeof(char));
-// 		while ((*data)->map[j][i] != '\0')
-// 		{
-// 			(*data)->mapbis[j][i] = (*data)->map[j][i];
-// 			i++;
-// 		}
-// 		(*data)->mapbis[j][i] = '\0';
-// 		j++;
-// 	}
-// 	(*data)->mapbis[j] = NULL;
+// void	set_info_texture(t_data **data)
+// {
+// 	(*data)->txt_north.witdh = 50;
+// 	(*data)->txt_north.height = 50;
+
+// 	(*data)->txt_south.witdh = 50;
+// 	(*data)->txt_south.height = 50;
+
+// 	(*data)->txt_east.witdh = 50;
+// 	(*data)->txt_east.height = 50;
+
+// 	(*data)->txt_west.witdh = 50;
+// 	(*data)->txt_west.height = 50;
 // }
 
-
-void    init_data(char *av, t_data **data, char *buffer)
+void	extract_color(t_data **data, char **buf)
 {
-	char	**buf;
-	int 	fd;
+	char	**rgb;
+	
+	rgb = NULL;
+	if (ft_strequal(buf[0], "F") == 0)
+	{
+		rgb = ft_split(buf[1], ',');
+		(*data)->txt_ground = (ft_atoi(rgb[0]) << 16) + (ft_atoi(rgb[1]) << 8) + ft_atoi(rgb[2]);
+	}
+	else if (ft_strequal(buf[0], "C") == 0)
+	{
+		rgb = ft_split(buf[1], ',');
+		(*data)->txt_ceiling = (ft_atoi(rgb[0]) << 16) + (ft_atoi(rgb[1]) << 8) + ft_atoi(rgb[2]);
+	}
+	if (rgb != NULL)
+		ft_free_tab(rgb);
+}
 
-	check_cub(av);
-	(*data)->wid = 50;
-	(*data)->hei = 50;
-	(*data)->mlx_ptr = mlx_init();
+void	extract_texture(t_data **data, char **buf)
+{
+	if (ft_strequal(buf[0], "NO") == 0)
+	{
+		(*data)->txt_north = (t_texture *)malloc (sizeof(t_texture));
+		(*data)->txt_north->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr, buf[1], &(*data)->wid, &(*data)->hei);
+		(*data)->txt_north->txt_data = mlx_get_data_addr((*data)->txt_north->txt_img, &(*data)->txt_north->bits_per_pixel, &(*data)->txt_north->size_line, &(*data)->txt_north->endianl);
+	}
+	else if (ft_strequal(buf[0], "SO") == 0)
+	{
+		(*data)->txt_south = (t_texture *)malloc (sizeof(t_texture));
+		(*data)->txt_south->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr, buf[1], &(*data)->wid, &(*data)->hei);
+		(*data)->txt_south->txt_data = mlx_get_data_addr((*data)->txt_south->txt_img, &(*data)->txt_south->bits_per_pixel, &(*data)->txt_south->size_line, &(*data)->txt_south->endianl);
+	}
+	else if (ft_strequal(buf[0], "WE") == 0)
+	{
+		(*data)->txt_west = (t_texture *)malloc (sizeof(t_texture));
+		(*data)->txt_west->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr, buf[1], &(*data)->wid, &(*data)->hei);
+		(*data)->txt_west->txt_data = mlx_get_data_addr((*data)->txt_west->txt_img, &(*data)->txt_west->bits_per_pixel, &(*data)->txt_west->size_line, &(*data)->txt_west->endianl);
+	}
+	else if (ft_strequal(buf[0], "EA") == 0)
+	{
+		(*data)->txt_east = (t_texture *)malloc (sizeof(t_texture));
+		(*data)->txt_east->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr, buf[1], &(*data)->wid, &(*data)->hei);
+		(*data)->txt_east->txt_data = mlx_get_data_addr((*data)->txt_east->txt_img, &(*data)->txt_east->bits_per_pixel, &(*data)->txt_east->size_line, &(*data)->txt_east->endianl);
+	}
+	extract_color(data, buf);
+}
+
+void	extract_info(t_data **data, char *av, char *buffer)
+{
+	int		fd;
+	char	**buf;
+	
 	fd = open(av, O_RDONLY);
 	if (fd < 0)
 	{
@@ -146,31 +181,103 @@ void    init_data(char *av, t_data **data, char *buffer)
 	buf = ft_split_link(buffer, ' ');		
 	while (buffer != NULL && ft_isdigit(first_num(buffer)) != 1)
 	{
-		printf("%c\n", first_num(buffer));
+		// printf("%c\n", first_num(buffer));
 		if (buf[0] == NULL)
 		{
 			buffer = gnl(fd, buffer);
 			continue;
 		}
-		if (ft_strequal(buf[0], "NO") == 0)
-			(*data)->txt_north = mlx_xpm_file_to_image((*data)->mlx_ptr, buf[1], &(*data)->wid, &(*data)->hei);
-		else if (ft_strequal(buf[0], "SO") == 0)
-			(*data)->txt_south = ft_strdup(buf[1]);
-		else if (ft_strequal(buf[0], "WE") == 0)
-			(*data)->txt_west = ft_strdup(buf[1]);
-		else if (ft_strequal(buf[0], "EA") == 0)
-			(*data)->txt_east = ft_strdup(buf[1]);
-		else if (ft_strequal(buf[0], "F") == 0)
-			(*data)->txt_ground = ft_strdup(buf[1]);
-		else if (ft_strequal(buf[0], "C") == 0)
-			(*data)->txt_ceiling = ft_strdup(buf[1]);
+		extract_texture(data, buf);
 		buffer = gnl(fd, buffer);
 		ft_free_tab(buf);
 		buf = ft_split_link(buffer, ' ');
 	}
 	ft_free_tab(buf);
 	ft_extrac_map(fd, buffer, data);
+}
+
+void	set_dir_bis(t_data **data, char c)
+{
+	if (c == 'E')
+	{
+		(*data)->dir_x = 1;
+		(*data)->dir_y = 0;
+		(*data)->plane_x = 0;
+		(*data)->plane_y = 0.66;
+	}
+	else if (c == 'W')
+	{
+		(*data)->dir_x = -1;
+		(*data)->dir_y = 0;
+		(*data)->plane_x = 0;
+		(*data)->plane_y = -0.66;
+	}
+}
+
+void	set_dir(t_data **data, char c)
+{
+	if (c == 'N')
+	{
+		(*data)->dir_x = 0;
+		(*data)->dir_y = -1;
+		(*data)->plane_x = 0.66;
+		(*data)->plane_y = 0;
+	}
+	else if (c == 'S')
+	{
+		(*data)->dir_x = 0;
+		(*data)->dir_y = 1;
+		(*data)->plane_x = -0.66;
+		(*data)->plane_y = 0;
+	}
+	set_dir_bis(data, c);
+}
+
+void	calculate_pos_player(t_data **data)
+{
+	int y;
+	int	x;
+
+	y = 0;
+	while ((*data)->map[y] != NULL)
+	{
+		x = 0;
+		while ((*data)->map[y][x] != '\0')
+		{
+			if ((*data)->map[y][x] == 'N' || (*data)->map[y][x] == 'S'
+				|| (*data)->map[y][x] == 'E' || (*data)->map[y][x] == 'W')
+			{
+				(*data)->player_x = (double)x + 0.5;
+				(*data)->player_y = (double)y + 0.5;
+				set_dir(data, (*data)->map[y][x]);
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+
+void    init_data(char *av, t_data **data, char *buffer)
+{
+	check_cub(av);
+	(*data)->mlx_ptr = mlx_init();
+	(*data)->win_ptr = mlx_new_window((*data)->mlx_ptr, W_WIDTH, W_HEIGHT, "Cub3d des gros BOOOOWGOS");
+	(*data)->index_img = 3;
+
+	(*data)->wid = 50;
+	(*data)->hei = 50;
+
+	// (*data)->player_x = 13;
+	// (*data)->player_y = 1.5;
+	// (*data)->dir_x = -1;
+	// (*data)->dir_y = 0;
+	// (*data)->plane_x = 0;
+	// (*data)->plane_y = -0.66;
+
+	extract_info(data, av, buffer);
 	calculate_window(data);
+	calculate_pos_player(data);
 	printf("%d, %d\n", (*data)->m_hei, (*data)->m_wid);
 	copymap(data);
 	// printf("%s\n", (*data)->mapbis[0]);
@@ -211,3 +318,26 @@ void    init_data(char *av, t_data **data, char *buffer)
 	// 	// else if (ft_strequal(buf[1][0], "C") == 0)
 	// 	// 	data->txt_north = mlx_xpm_file_to_image(data->mlx_ptr, buf[1][1], &data->xpm_wid, &data->xpm_hei);
 	// }
+
+
+	// void	copymap(t_data **data)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	j = 0;
+// 	(*data)->mapbis = (char **)malloc(((*data)->m_hei + 1) * sizeof(char *));
+// 	while ((*data)->map[j] != NULL)
+// 	{
+// 		i = 0;
+// 		(*data)->mapbis[j] = (char *)malloc (((*data)->m_wid + 2) * sizeof(char));
+// 		while ((*data)->map[j][i] != '\0')
+// 		{
+// 			(*data)->mapbis[j][i] = (*data)->map[j][i];
+// 			i++;
+// 		}
+// 		(*data)->mapbis[j][i] = '\0';
+// 		j++;
+// 	}
+// 	(*data)->mapbis[j] = NULL;
+// }

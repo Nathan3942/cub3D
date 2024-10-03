@@ -1,10 +1,10 @@
 NO ./textures/cobel.xpm
-SO ./textures/cobel.xpm
-WE ./textures/cobel.xpm
-EA ./textures/cobel.xpm
+SO ./textures/wood.xpm
+WE ./textures/netherack.xpm
+EA ./textures/diamond.xpm
 
-F 220,100,0
-C 225,30,0
+F 0,200,0
+C 0,0,139
 
         1111111111111111111111111
         1000000000000000000000001

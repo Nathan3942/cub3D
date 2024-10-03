@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:55:41 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/09/16 14:58:59 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/09/24 02:34:14 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	print_limit(t_data **data)
 			x++;
 		y++;
 	}
-	printf("Limit map : y %d, x %d\n", y, x);
+	// printf("Limit map : y %d, x %d\n", y, x);
 }
 
 void	ft_print_mapp(char **map)
@@ -78,10 +78,10 @@ void	ft_print_mapp(char **map)
 	i = 0;
 	while (map[i])
 	{
-		printf("%s\n", map[i]);
+		// printf("%s\n", map[i]);
 		i++;
 	}
-	printf("\n\n");
+	// printf("\n\n");
 }
 
 int check_border(char **mapbis, int y, int x, int i)
@@ -133,7 +133,7 @@ int	check_perso(t_data **data, int y, int x)
 	int	res;
 
 	print_limit(data);
-	printf("y %d, x %d, map %c 		:3\n", y, x, (*data)->mapbis[y][x]);
+	// printf("y %d, x %d, map %c 		:3\n", y, x, (*data)->mapbis[y][x]);
 	if ((*data)->mapbis[y][x] == '1' || (*data)->mapbis[y][x] == '3')
 		return (0);
 	if (y <= 0 || x <= 0 || y >= (*data)->m_hei + 1 || x >= (*data)->m_wid + 1)
