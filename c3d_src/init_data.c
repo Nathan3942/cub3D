@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:30:46 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/03 15:00:53 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:28:55 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,6 @@ void	extract_info(t_data **data, char *av, char *buffer)
 	buf = ft_split_link(buffer, ' ');		
 	while (buffer != NULL && ft_isdigit(first_num(buffer)) != 1)
 	{
-		// printf("%c\n", first_num(buffer));
 		if (buf[0] == NULL)
 		{
 			buffer = gnl(fd, buffer);
@@ -266,24 +265,23 @@ void	calculate_pos_player(t_data **data)
 	}
 }
 
-void	calculate_screen(t_data **data)
-{
-	Display	*disp;
-	Screen	*screen;
+// void	calculate_screen(t_data **data)
+// {
+// 	Display	*disp;
+// 	Screen	*screen;
 
-	disp = XOpenDisplay(NULL);
-	screen = DefaultScreenOfDisplay(disp);
-	(*data)->w_wid = screen->width;
-	(*data)->W_hei = screen->height;
-	XCloseDisplay(disp);
-}
+// 	disp = XOpenDisplay(NULL);
+// 	screen = DefaultScreenOfDisplay(disp);
+// 	(*data)->w_wid = screen->width;
+// 	(*data)->W_hei = screen->height;
+// 	XCloseDisplay(disp);
+// }
 
 
 void    init_data(char *av, t_data **data, char *buffer)
 {
 	check_cub(av);
 	(*data)->mlx_ptr = mlx_init();
-	calculate_screen(data);
 	(*data)->win_ptr = mlx_new_window((*data)->mlx_ptr, W_WIDTH, W_HEIGHT, "Cub3d des gros BOOOOWGOS");
 	(*data)->index_img = 3;
 
@@ -291,17 +289,17 @@ void    init_data(char *av, t_data **data, char *buffer)
 	(*data)->hei = 500;
 	(*data)->x_mouse = -1;
 
-	// (*data)->player_x = 13;
-	// (*data)->player_y = 1.5;
-	// (*data)->dir_x = -1;
-	// (*data)->dir_y = 0;
-	// (*data)->plane_x = 0;
-	// (*data)->plane_y = -0.66;
+	(*data)->m_up = false;
+	(*data)->m_down = false;
+	(*data)->m_left = false;
+	(*data)->m_right = false;
+	(*data)->t_left = false;
+	(*data)->t_right = false;
 
 	extract_info(data, av, buffer);
 	calculate_window(data);
 	calculate_pos_player(data);
-	printf("%d, %d\n", (*data)->m_hei, (*data)->m_wid);
+	// printf("%d, %d\n", (*data)->m_hei, (*data)->m_wid);
 	copymap(data);
 	// printf("%s\n", (*data)->mapbis[0]);
 	// img_test(data);

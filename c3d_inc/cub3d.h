@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 03:24:01 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/10/03 05:38:37 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:01:27 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,13 @@ typedef struct s_data
 	int		endian;
 	int		index_img;
 
+	//input
+	bool	m_left;
+	bool	m_right;
+	bool	m_up;
+	bool	m_down;
+	bool	t_left;
+	bool	t_right;
 	int		x_mouse;
 
 }	t_data;
@@ -130,7 +137,7 @@ typedef struct s_raycast
 
 //render
 void	render(t_data **data);
-
+void	draw_wall(t_data **data, t_raycast **ray, int x);
 
 //init
 char	*gnl(int fd, char *buffer);
@@ -155,5 +162,8 @@ void    check_map(t_data **data);
 
 //mini_map
 void    mini_map(t_data **data);
+
+//input
+void	input(t_data **data);
 
 #endif

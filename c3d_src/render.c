@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 02:05:22 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/03 15:28:21 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:07:31 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_ray(t_data **data, t_raycast **ray, int x)
 	(*ray)->hit = 0;
 	// printf("data : %f, %f, %f, %f\n", (*data)->dir_x, (*data)->dir_y, (*data)->plane_x, (*data)->plane_y);
 	// printf("cam %f, %f, %f\n", (*ray)->camera_x, (*ray)->ray_dir_x, (*ray)->ray_dir_y);
-	// printf("Dir : %f, %f\nPlane : %f, %f\n", (*data)->dir_x, (*data)->dir_y, (*data)->plane_x, (*data)->plane_y);
+	printf("Dir : %f, %f\nPlane : %f, %f\n", (*data)->dir_x, (*data)->dir_y, (*data)->plane_x, (*data)->plane_y);
 	return (0);
 }
 
@@ -102,91 +102,13 @@ void	calcul_view_texture(t_data **data, t_raycast **ray)
 		(*ray)->wall_x = (*data)->player_x + (*ray)->perp_wall_dist * (*ray)->ray_dir_x;
 	(*ray)->wall_x -= floor((*ray)->wall_x);
 	(*ray)->tex_x = (int)((*ray)->wall_x * (double)(*data)->wid);
-	// if ((*ray)->side == 0 && (*ray)->ray_dir_x > 0)
-	// 	(*ray)->tex_x = (*data)->wid - (*ray)->tex_x - 1;
-	// if ((*ray)->side == 1 && (*ray)->ray_dir_x < 0)
-	// 	(*ray)->tex_x = (*data)->wid - (*ray)->tex_x - 1;
 }
-
-void	draw_ceiling(t_data **data, t_raycast **ray, int x)
-{
-	int	y;
-	int color;
-	int pixel_index;
-
-	y = 0;
-	color = (*data)->txt_ceiling;
-	while (y < (*ray)->draw_start)
-	{
-		pixel_index = (y * (*data)->size_line) + (x * ((*data)->bite_per_pixel / 8));
-		(*data)->mlx_address[pixel_index] = color & 0xFF;
-		(*data)->mlx_address[pixel_index + 1] = (color >> 8) & 0xFF;
-		(*data)->mlx_address[pixel_index + 2] = (color >> 16) & 0xFF;
-		y++;
-	}
-}
-
-void	draw_ground(t_data **data, t_raycast **ray, int x)
-{
-	int	y;
-	int color;
-	int pixel_index;
-
-	y = (*ray)->draw_end;
-	color = (*data)->txt_ground;
-	while (y < W_HEIGHT)
-	{
-		pixel_index = (y * (*data)->size_line) + (x * ((*data)->bite_per_pixel / 8));
-		(*data)->mlx_address[pixel_index] = color & 0xFF;
-		(*data)->mlx_address[pixel_index + 1] = (color >> 8) & 0xFF;
-		(*data)->mlx_address[pixel_index + 2] = (color >> 16) & 0xFF;
-		y++;
-	}
-}
-
-void	draw_texture(t_data **data, t_raycast **ray, int x, t_texture *txt)
-{
-	int	y;
-	int tex_y;
-	int color;
-	int pixel_index;
-
-	draw_ceiling(data, ray, x);
-	y = (*ray)->draw_start;
-	while (y < (*ray)->draw_end)
-	{
-		tex_y = (((y * 256 - W_HEIGHT * 128 + (*ray)->line_height * 128) * (*data)->hei) / (*ray)->line_height) / 256;
-		color = *(int *)(txt->txt_data + (tex_y * txt->size_line + (*ray)->tex_x * (txt->bits_per_pixel / 8)));
-		pixel_index = (y * (*data)->size_line) + (x * ((*data)->bite_per_pixel / 8));
-		(*data)->mlx_address[pixel_index] = color & 0xFF;
-		(*data)->mlx_address[pixel_index + 1] = (color >> 8) & 0xFF;
-		(*data)->mlx_address[pixel_index + 2] = (color >> 16) & 0xFF;
-		y++;
-	}
-	draw_ground(data, ray, x);
-}
-
-void	draw_wall(t_data **data, t_raycast **ray, int x)
-{
-	if ((*ray)->hit == 2)
-		draw_texture(data, ray, x, (*data)->txt_door);
-	else if ((*ray)->side == 1 && (*ray)->ray_dir_y < 0)
-		draw_texture(data, ray, x, (*data)->txt_south);
-	else if ((*ray)->side == 1 && (*ray)->ray_dir_y > 0)
-		draw_texture(data, ray, x, (*data)->txt_north);
-	else if ((*ray)->side == 0 && (*ray)->ray_dir_x > 0)
-		draw_texture(data, ray, x, (*data)->txt_east);
-	else
-		draw_texture(data, ray, x, (*data)->txt_west);
-}
-
 
 void	ray_cast(t_data **data)
 {
 	int			x;
 	t_raycast	*ray;
 
-	// ray = malloc (sizeof(t_raycast));
 	x = 0;
 	while (x < W_WIDTH)
 	{
@@ -198,16 +120,15 @@ void	ray_cast(t_data **data)
 		calcul_draw_line(data, &ray);
 		calcul_view_texture(data, &ray);
 		draw_wall(data, &ray, x);
-		// draw_line(data, &ray, x);
 		free(ray);
 		x++;
 	}
-	// free(ray);
 }
 
 
 void	render(t_data **data)
 {
+	input(data);
 	if ((*data)->index_img == 0 || (*data)->index_img == 3)
 	{
 		(*data)->img_ptr1 = mlx_new_image((*data)->mlx_ptr, W_WIDTH, W_HEIGHT + 2);
@@ -218,10 +139,7 @@ void	render(t_data **data)
 		(*data)->img_ptr2 = mlx_new_image((*data)->mlx_ptr, W_WIDTH, W_HEIGHT + 2);
 		(*data)->mlx_address = mlx_get_data_addr((*data)->img_ptr2, &(*data)->bite_per_pixel, &(*data)->size_line, &(*data)->endian);
 	}
-	// (*data)->mini_map = mlx_new_image((*data)->mlx_ptr, 150, 150);
-	// (*data)->mini_data = mlx_get_data_addr((*data)->mini_map, &(*data)->m_bite_per_pixel, &(*data)->m_size_line, &(*data)->m_endian);
 	ray_cast(data);
-	//mini_map(data);
 	if ((*data)->index_img == 0 || (*data)->index_img == 3)
 	{
 		mlx_put_image_to_window((*data)->mlx_ptr, (*data)->win_ptr, (*data)->img_ptr1, 0, 0);
@@ -235,7 +153,6 @@ void	render(t_data **data)
 		mlx_destroy_image((*data)->mlx_ptr, (*data)->img_ptr1);
 		(*data)->index_img = 0;
 	}
-	// mlx_put_image_to_window((*data)->mlx_ptr, (*data)->win_ptr, (*data)->mini_map, 0, 0);
 }
 
 
