@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:00:45 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/08 16:28:47 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:33:10 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 void	draw_ceiling(t_data **data, t_raycast **ray, int x)
 {
 	int	y;
-	int color;
-	int pixel_index;
+	int	color;
+	int	pixel_index;
 
 	y = 0;
 	color = (*data)->txt_ceiling;
 	while (y < (*ray)->draw_start)
 	{
-		pixel_index = (y * (*data)->size_line) + (x * ((*data)->bite_per_pixel / 8));
+		pixel_index = (y * (*data)->size_line)
+			+ (x * ((*data)->bite_per_pixel / 8));
 		(*data)->mlx_address[pixel_index] = color & 0xFF;
 		(*data)->mlx_address[pixel_index + 1] = (color >> 8) & 0xFF;
 		(*data)->mlx_address[pixel_index + 2] = (color >> 16) & 0xFF;
@@ -33,14 +34,15 @@ void	draw_ceiling(t_data **data, t_raycast **ray, int x)
 void	draw_ground(t_data **data, t_raycast **ray, int x)
 {
 	int	y;
-	int color;
-	int pixel_index;
+	int	color;
+	int	pixel_index;
 
 	y = (*ray)->draw_end;
 	color = (*data)->txt_ground;
 	while (y < W_HEIGHT)
 	{
-		pixel_index = (y * (*data)->size_line) + (x * ((*data)->bite_per_pixel / 8));
+		pixel_index = (y * (*data)->size_line)
+			+ (x * ((*data)->bite_per_pixel / 8));
 		(*data)->mlx_address[pixel_index] = color & 0xFF;
 		(*data)->mlx_address[pixel_index + 1] = (color >> 8) & 0xFF;
 		(*data)->mlx_address[pixel_index + 2] = (color >> 16) & 0xFF;
@@ -51,17 +53,20 @@ void	draw_ground(t_data **data, t_raycast **ray, int x)
 void	draw_texture(t_data **data, t_raycast **ray, int x, t_texture *txt)
 {
 	int	y;
-	int tex_y;
-	int color;
-	int pixel_index;
+	int	tex_y;
+	int	color;
+	int	pixel_index;
 
 	draw_ceiling(data, ray, x);
 	y = (*ray)->draw_start;
 	while (y < (*ray)->draw_end)
 	{
-		tex_y = (((y * 256 - W_HEIGHT * 128 + (*ray)->line_height * 128) * (*data)->hei) / (*ray)->line_height) / 256;
-		color = *(int *)(txt->txt_data + (tex_y * txt->size_line + (*ray)->tex_x * (txt->bits_per_pixel / 8)));
-		pixel_index = (y * (*data)->size_line) + (x * ((*data)->bite_per_pixel / 8));
+		tex_y = (((y * 256 - W_HEIGHT * 128 + (*ray)->line_height * 128)
+					* (*data)->hei) / (*ray)->line_height) / 256;
+		color = *(int *)(txt->txt_data + (tex_y * txt->size_line
+					+ (*ray)->tex_x * (txt->bits_per_pixel / 8)));
+		pixel_index = (y * (*data)->size_line)
+			+ (x * ((*data)->bite_per_pixel / 8));
 		(*data)->mlx_address[pixel_index] = color & 0xFF;
 		(*data)->mlx_address[pixel_index + 1] = (color >> 8) & 0xFF;
 		(*data)->mlx_address[pixel_index + 2] = (color >> 16) & 0xFF;

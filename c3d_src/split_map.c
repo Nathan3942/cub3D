@@ -6,16 +6,16 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 03:55:15 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/09/12 05:37:49 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:43:03 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../c3d_inc/cub3d.h"
 
-int count_wd(char *buffer, char c)
+int	count_wd(char *buffer, char c)
 {
-	int i;
-	int num_wd;
+	int	i;
+	int	num_wd;
 
 	i = 0;
 	num_wd = 0;
@@ -31,12 +31,11 @@ int count_wd(char *buffer, char c)
 	return (num_wd);
 }
 
-int max_map(char *buffer, char sep)
+int	max_map(char *buffer, char sep)
 {
-	int i;
-	int max;
-	int tmp;
-
+	int	i;
+	int	max;
+	int	tmp;
 
 	i = 0;
 	max = 0;
@@ -56,12 +55,11 @@ int max_map(char *buffer, char sep)
 	return (max);
 }
 
-
-char *put_wd(char *buffer, char c, int *i)
+char	*put_wd(char *buffer, char c, int *i)
 {
-	char *dest;
-	int max;
-	int z;
+	char	*dest;
+	int		max;
+	int		z;
 
 	while (buffer[*i] != '\0' && buffer[*i] == c)
 		(*i)++;
@@ -84,20 +82,17 @@ char *put_wd(char *buffer, char c, int *i)
 	return (dest);
 }
 
-
-char **split_map(char *buffer, char c)
+char	**split_map(char *buffer, char c)
 {
-	char **dest;
-	int num_wd;
-	int i;
-	int pos;
+	char	**dest;
+	int		num_wd;
+	int		i;
+	int		pos;
 
 	if (!buffer)
 		return (NULL);
 	num_wd = count_wd(buffer, c);
 	dest = (char **)malloc((num_wd + 1) * sizeof(char *));
-	if (!dest)
-		return (NULL);
 	pos = 0;
 	i = 0;
 	while (i < num_wd)

@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 04:13:38 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/10/08 16:24:41 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:01:21 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,45 +63,45 @@ void	door(t_data **data)
 
 int    key_hook(int keycode, t_data **data)
 {
-	if (keycode == 65307)
+	if (keycode == 53)
 	{
 		// mlx_destroy_window((*data)->mlx_ptr, (*data)->win_ptr);
 		ft_putstr_fd("EXIT", 1);
 		free_all(data);
 		exit(0);
 	}
-	if (keycode == 102)
+	if (keycode == 3)
 		door(data);
 		
-	// printf("%d : %c\n", keycode, (*data)->map[(int)(*data)->player_y][(int)(*data)->player_x]);
-	if (keycode == 119)
+	printf("%d : %c\n", keycode, (*data)->map[(int)(*data)->player_y][(int)(*data)->player_x]);
+	if (keycode == 13)
 		(*data)->m_up = true;
-	if (keycode == 115)
+	if (keycode == 1)
 		(*data)->m_down = true;
-	if (keycode == 100)
+	if (keycode == 2)
 		(*data)->m_left = true;
-	if (keycode == 97)
+	if (keycode == 0)
 		(*data)->m_right = true;
-	if (keycode == 113)
+	if (keycode == 12)
 		(*data)->t_left = true;
-	if (keycode == 101)
+	if (keycode == 14)
 		(*data)->t_right = true;
 	return (0);
 }
 
 int	key_release(int keycode, t_data **data)
 {
-	if (keycode == 119)
+	if (keycode == 13)
 		(*data)->m_up = false;
-	if (keycode == 115)
+	if (keycode == 1)
 		(*data)->m_down = false;
-	if (keycode == 100)
+	if (keycode == 2)
 		(*data)->m_left = false;
-	if (keycode == 97)
+	if (keycode == 0)
 		(*data)->m_right = false;
-	if (keycode == 113)
+	if (keycode == 12)
 		(*data)->t_left = false;
-	if (keycode == 101)
+	if (keycode == 14)
 		(*data)->t_right = false;
 	return (0);
 }
@@ -161,7 +161,7 @@ int main(int ac, char **av)
 	data = (t_data *)malloc(sizeof(t_data));
 	init_data(av[1], &data, buffer);
 	check_map(&data);
-	//print_para(data);
+	print_para(data);
 	mlx_loop_hook(data->mlx_ptr, (void *)render, &data);
 	mlx_hook(data->win_ptr, 17, 0, exit_1, &data);
 	mlx_hook(data->win_ptr, 2, 1L<<0, key_hook, &data);

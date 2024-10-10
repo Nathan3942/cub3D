@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 03:24:01 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/10/08 16:01:27 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:19:02 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include "../mlx/mlx.h"
 #include "../libft/lib_includes/libft.h"
 #include "c3d_keys.h"
-#include <X11/Xlib.h>
+
 
 /*/////////////////////////////////////////////////////////////////////////////
 		STRUCTURES TYPEDEFS
@@ -42,58 +42,58 @@ typedef struct s_texture
 typedef struct s_data
 {
 	//mlx
-	void	*mlx_ptr;
-	void	*win_ptr;
-	char	*mlx_address;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	char			*mlx_address;
 	//texture
-	t_texture	*txt_north;
-	t_texture	*txt_south;
-	t_texture	*txt_west;
-	t_texture	*txt_east;
-	t_texture	*txt_door;
+	t_texture		*txt_north;
+	t_texture		*txt_south;
+	t_texture		*txt_west;
+	t_texture		*txt_east;
+	t_texture		*txt_door;
 	unsigned int	txt_ground;
 	unsigned int	txt_ceiling;
 	//minimap
-	void	*mini_map;
-	char	*mini_data;
-	int		mini_w;
-	int		mini_h;
-	int		m_bite_per_pixel;
-	int		m_size_line;
-	int		m_endian;
+	void			*mini_map;
+	char			*mini_data;
+	int				mini_w;
+	int				mini_h;
+	int				m_bite_per_pixel;
+	int				m_size_line;
+	int				m_endian;
 
 	//map
-	char	**map;
-	char	**mapbis;
-	int		m_wid;
-	int		m_hei;
+	char			**map;
+	char			**mapbis;
+	int				m_wid;
+	int				m_hei;
 	//state
-	int		W_hei;
-	int		w_wid;
-	int		hei;
-	int		wid;
-	double	player_x;
-	double	player_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
+	int				w_hei;
+	int				w_wid;
+	int				hei;
+	int				wid;
+	double			player_x;
+	double			player_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
 	//image
-	void	*img_ptr1;
-	void	*img_ptr2;
-	int		bite_per_pixel;
-	int		size_line;
-	int		endian;
-	int		index_img;
+	void			*img_ptr1;
+	void			*img_ptr2;
+	int				bite_per_pixel;
+	int				size_line;
+	int				endian;
+	int				index_img;
 
 	//input
-	bool	m_left;
-	bool	m_right;
-	bool	m_up;
-	bool	m_down;
-	bool	t_left;
-	bool	t_right;
-	int		x_mouse;
+	bool			m_left;
+	bool			m_right;
+	bool			m_up;
+	bool			m_down;
+	bool			t_left;
+	bool			t_right;
+	int				x_mouse;
 
 }	t_data;
 
@@ -120,16 +120,9 @@ typedef struct s_raycast
 	int		draw_end;
 	double	wall_x;
 	int		tex_x;
-	
+
 }	t_raycast;
 
-
-/*Notes pour Nathans :
-*	J'ai pas pense a d'autres structures donc a toi de voir si
-*	si tu trouves quelque chose de pertinant mais je pense
-*	qu'on va deja faire une base du jeu en 2d giga epure pour
-*	pas se perdre. Mais ajoutes tout ce qui semble bien.
-*/
 
 /*/////////////////////////////////////////////////////////////////////////////
 		FUNCTIONS PROTOTYPES
@@ -138,13 +131,18 @@ typedef struct s_raycast
 //render
 void	render(t_data **data);
 void	draw_wall(t_data **data, t_raycast **ray, int x);
+void	calcul_draw_line(t_data **data, t_raycast **ray);
+void	calcul_view_texture(t_data **data, t_raycast **ray);
 
 //init
 char	*gnl(int fd, char *buffer);
 char	*gnl_map(int fd, char *buffer);
-void    init_data(char *av, t_data **data, char *buffer);
+void	init_data(char *av, t_data **data, char *buffer);
 void	creat_map(t_data **data);
-char    **split_map(char *buffer, char c);
+char	**split_map(char *buffer, char c);
+void	calculate_pos_player(t_data **data);
+void	ft_extrac_map(int fd, char *buffer, t_data **data);
+void	extract_info(t_data **data, char *av, char *buffer);
 
 // test
 void	print_para(t_data *data);
@@ -157,11 +155,12 @@ void	free_all(t_data **data);
 char	first_num(char *buffer);
 
 //check_map
-void    check_cub(char *av);
-void    check_map(t_data **data);
+void	check_cub(char *av);
+void	check_map(t_data **data);
+void	check_close(t_data **data);
 
 //mini_map
-void    mini_map(t_data **data);
+void	mini_map(t_data **data);
 
 //input
 void	input(t_data **data);

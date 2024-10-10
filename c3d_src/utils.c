@@ -6,15 +6,15 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 02:28:39 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/09/12 05:09:43 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:42:30 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../c3d_inc/cub3d.h"
 
-char first_num(char *buffer)
+char	first_num(char *buffer)
 {
-	int i;
+	int	i;
 
 	if (buffer[0] != ' ')
 		return (buffer[0]);
@@ -23,5 +23,3 @@ char first_num(char *buffer)
 		i++;
 	return (buffer[i]);
 }
-
-

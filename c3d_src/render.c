@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 02:05:22 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/08 16:07:31 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:44:05 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_ray(t_data **data, t_raycast **ray, int x)
 	(*ray)->hit = 0;
 	// printf("data : %f, %f, %f, %f\n", (*data)->dir_x, (*data)->dir_y, (*data)->plane_x, (*data)->plane_y);
 	// printf("cam %f, %f, %f\n", (*ray)->camera_x, (*ray)->ray_dir_x, (*ray)->ray_dir_y);
-	printf("Dir : %f, %f\nPlane : %f, %f\n", (*data)->dir_x, (*data)->dir_y, (*data)->plane_x, (*data)->plane_y);
+	//printf("Dir : %f, %f\nPlane : %f, %f\n", (*data)->dir_x, (*data)->dir_y, (*data)->plane_x, (*data)->plane_y);
 	return (0);
 }
 
@@ -36,22 +36,26 @@ void	side_dist(t_data **data, t_raycast **ray)
 	if ((*ray)->ray_dir_x < 0)
 	{
 		(*ray)->step_x = -1;
-		(*ray)->side_dist_x = ((*data)->player_x - (*ray)->map_x) * (*ray)->unit_dir_x;
+		(*ray)->side_dist_x = ((*data)->player_x
+				- (*ray)->map_x) * (*ray)->unit_dir_x;
 	}
 	else
 	{
 		(*ray)->step_x = 1;
-		(*ray)->side_dist_x = ((*ray)->map_x + 1.0 - (*data)->player_x) * (*ray)->unit_dir_x;
+		(*ray)->side_dist_x = ((*ray)->map_x + 1.0
+				- (*data)->player_x) * (*ray)->unit_dir_x;
 	}
 	if ((*ray)->ray_dir_y < 0)
 	{
 		(*ray)->step_y = -1;
-		(*ray)->side_dist_y = ((*data)->player_y - (*ray)->map_y) * (*ray)->unit_dir_y;
+		(*ray)->side_dist_y = ((*data)->player_y
+				- (*ray)->map_y) * (*ray)->unit_dir_y;
 	}
 	else
 	{
 		(*ray)->step_y = 1;
-		(*ray)->side_dist_y = ((*ray)->map_y + 1.0 - (*data)->player_y) * (*ray)->unit_dir_y;
+		(*ray)->side_dist_y = ((*ray)->map_y + 1.0
+				- (*data)->player_y) * (*ray)->unit_dir_y;
 	}
 }
 
@@ -78,32 +82,6 @@ void	hit_wall(t_data **data, t_raycast **ray)
 	}
 }
 
-void	calcul_draw_line(t_data **data, t_raycast **ray)
-{
-	if ((*ray)->side == 0)
-		(*ray)->perp_wall_dist = ((*ray)->map_x - (*data)->player_x + (1 - (*ray)->step_x) / 2) / (*ray)->ray_dir_x;
-	else
-		(*ray)->perp_wall_dist = ((*ray)->map_y - (*data)->player_y + (1 - (*ray)->step_y) / 2) / (*ray)->ray_dir_y;
-	(*ray)->line_height = (int)(W_HEIGHT / (*ray)->perp_wall_dist);
-	(*ray)->draw_start = -(*ray)->line_height / 2 + W_HEIGHT / 2;
-	if ((*ray)->draw_start < 0)
-		(*ray)->draw_start = 0;
-	(*ray)->draw_end = (*ray)->line_height / 2 + W_HEIGHT / 2;
-	if ((*ray)->draw_end >= W_HEIGHT)
-		(*ray)->draw_end = W_HEIGHT - 1;
-	// printf("draw : %d, %d, %f\nmap : %d, %d\n", (*ray)->draw_start, (*ray)->draw_end, (*ray)->perp_wall_dist, (*ray)->map_x, (*ray)->map_y);
-}
-
-void	calcul_view_texture(t_data **data, t_raycast **ray)
-{
-	if ((*ray)->side == 0)
-		(*ray)->wall_x = (*data)->player_y + (*ray)->perp_wall_dist * (*ray)->ray_dir_y;
-	else
-		(*ray)->wall_x = (*data)->player_x + (*ray)->perp_wall_dist * (*ray)->ray_dir_x;
-	(*ray)->wall_x -= floor((*ray)->wall_x);
-	(*ray)->tex_x = (int)((*ray)->wall_x * (double)(*data)->wid);
-}
-
 void	ray_cast(t_data **data)
 {
 	int			x;
@@ -114,7 +92,7 @@ void	ray_cast(t_data **data)
 	{
 		ray = malloc (sizeof(t_raycast));
 		if (init_ray(data, &ray, x) == 1)
-			break;
+			break ;
 		side_dist(data, &ray);
 		hit_wall(data, &ray);
 		calcul_draw_line(data, &ray);
@@ -125,36 +103,42 @@ void	ray_cast(t_data **data)
 	}
 }
 
-
 void	render(t_data **data)
 {
 	input(data);
 	if ((*data)->index_img == 0 || (*data)->index_img == 3)
 	{
-		(*data)->img_ptr1 = mlx_new_image((*data)->mlx_ptr, W_WIDTH, W_HEIGHT + 2);
-		(*data)->mlx_address = mlx_get_data_addr((*data)->img_ptr1, &(*data)->bite_per_pixel, &(*data)->size_line, &(*data)->endian);
+		(*data)->img_ptr1 = mlx_new_image((*data)->mlx_ptr,
+				W_WIDTH, W_HEIGHT + 2);
+		(*data)->mlx_address = mlx_get_data_addr((*data)->img_ptr1,
+				&(*data)->bite_per_pixel, &(*data)->size_line,
+				&(*data)->endian);
 	}
 	else
 	{
-		(*data)->img_ptr2 = mlx_new_image((*data)->mlx_ptr, W_WIDTH, W_HEIGHT + 2);
-		(*data)->mlx_address = mlx_get_data_addr((*data)->img_ptr2, &(*data)->bite_per_pixel, &(*data)->size_line, &(*data)->endian);
+		(*data)->img_ptr2 = mlx_new_image((*data)->mlx_ptr,
+				W_WIDTH, W_HEIGHT + 2);
+		(*data)->mlx_address = mlx_get_data_addr((*data)->img_ptr2,
+				&(*data)->bite_per_pixel, &(*data)->size_line,
+				&(*data)->endian);
 	}
 	ray_cast(data);
 	if ((*data)->index_img == 0 || (*data)->index_img == 3)
 	{
-		mlx_put_image_to_window((*data)->mlx_ptr, (*data)->win_ptr, (*data)->img_ptr1, 0, 0);
+		mlx_put_image_to_window((*data)->mlx_ptr,
+			(*data)->win_ptr, (*data)->img_ptr1, 0, 0);
 		if ((*data)->index_img == 0)
 			mlx_destroy_image((*data)->mlx_ptr, (*data)->img_ptr2);
 		(*data)->index_img = 1;
 	}
 	else
 	{
-		mlx_put_image_to_window((*data)->mlx_ptr, (*data)->win_ptr, (*data)->img_ptr2, 0, 0);
+		mlx_put_image_to_window((*data)->mlx_ptr,
+			(*data)->win_ptr, (*data)->img_ptr2, 0, 0);
 		mlx_destroy_image((*data)->mlx_ptr, (*data)->img_ptr1);
 		(*data)->index_img = 0;
 	}
 }
-
 
 // void	draw_line(t_data **data, t_raycast **ray, int x)
 // {
