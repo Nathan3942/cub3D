@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:50:56 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/02 20:58:59 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:20:01 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print_map(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (data->map[i])
@@ -31,18 +31,7 @@ void	ft_print_map(t_data *data)
 	}
 }
 
-void	print_txt(t_data *data)
-{
-	// printf("NO : %s", data->txt_north);
-	// printf("SO : %s\n", data->txt_south);
-	// printf("WE : %s\n", data->txt_west);
-	// printf("EA : %s\n", data->txt_east);
-	// printf("F : %s\n", data->txt_ground);
-	// printf("C : %s\n", data->txt_ceiling);
-}
-
 void	print_para(t_data *data)
 {
 	ft_print_map(data);
-	print_txt(data);
 }

@@ -6,22 +6,21 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 03:24:01 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/10/10 17:19:02 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:17:15 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <fcntl.h>
-#include <math.h>
-#include "../mlx/mlx.h"
-#include "../libft/lib_includes/libft.h"
-#include "c3d_keys.h"
-
+# include <unistd.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <fcntl.h>
+# include <math.h>
+# include "../mlx/mlx.h"
+# include "../libft/lib_includes/libft.h"
+# include "c3d_keys.h"
 
 /*/////////////////////////////////////////////////////////////////////////////
 		STRUCTURES TYPEDEFS
@@ -30,8 +29,6 @@
 typedef struct s_texture
 {
 	void	*txt_img;
-	// int		witdh;
-	// int		height;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endianl;
@@ -123,7 +120,6 @@ typedef struct s_raycast
 
 }	t_raycast;
 
-
 /*/////////////////////////////////////////////////////////////////////////////
 		FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
@@ -133,6 +129,9 @@ void	render(t_data **data);
 void	draw_wall(t_data **data, t_raycast **ray, int x);
 void	calcul_draw_line(t_data **data, t_raycast **ray);
 void	calcul_view_texture(t_data **data, t_raycast **ray);
+int		init_ray(t_data **data, t_raycast **ray, int x);
+void	side_dist(t_data **data, t_raycast **ray);
+void	hit_wall(t_data **data, t_raycast **ray);
 
 //init
 char	*gnl(int fd, char *buffer);
@@ -143,6 +142,15 @@ char	**split_map(char *buffer, char c);
 void	calculate_pos_player(t_data **data);
 void	ft_extrac_map(int fd, char *buffer, t_data **data);
 void	extract_info(t_data **data, char *av, char *buffer);
+void	extract_texture(t_data **data, char **buf);
+void	extract_color(t_data **data, char **buf);
+
+//move
+void	input(t_data **data);
+void	move(t_data **data);
+void	move_lat(t_data **data);
+int		mouse_move(int x, int y, t_data **data);
+void	door(t_data **data);
 
 // test
 void	print_para(t_data *data);
@@ -150,6 +158,7 @@ void	print_para(t_data *data);
 //free
 void	ft_free_tab(char **tab);
 void	free_all(t_data **data);
+void	error(char *str);
 
 //utils
 char	first_num(char *buffer);
@@ -161,8 +170,5 @@ void	check_close(t_data **data);
 
 //mini_map
 void	mini_map(t_data **data);
-
-//input
-void	input(t_data **data);
 
 #endif

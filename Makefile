@@ -6,7 +6,7 @@
 #    By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 04:13:09 by ichpakov          #+#    #+#              #
-#    Updated: 2024/10/10 16:47:48 by njeanbou         ###   ########.fr        #
+#    Updated: 2024/10/14 16:24:23 by njeanbou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,8 @@ HEAD =	c3d_inc/cub3d.h			c3d_inc/c3d_keys.h
 #//////////////////////////////////////////////////////////////////////////////
 
 CC = gcc
-CF = -fsanitize=address -static-libsan #-Wall -Werror -Wextra -g
-SL = libmlx.dylib -framework OpenGL -framework AppKit
+CF = -fsanitize=address -static-libasan -Wall -Werror -Wextra -g
+SL = -Imlx -Imlx_linux -lXext -lX11 -lm -lz
 CI = -I ./c3d_inc/
 
 
@@ -46,10 +46,7 @@ all: ${NAME}
 # Binary creation
 
 ${NAME}: ${SRCS} ${HEAD} ${LIBFT} ${LIBMLX}
-	${CC} ${CF} ${CI} ${SRCS} ${LIBFT} ${LIBMLX} ${SL}  -o ${NAME}
-
-%.o: %.c
-	$(CC) -c $(FLAGS) -Imlx $< -o $@
+	${CC} ${CF} ${CI} ${SRCS} ${LIBFT} ${LIBMLX} ${SL} -o ${NAME}
 
 ${LIBFT}:
 	make -C libft/

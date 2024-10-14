@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:18:33 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/10 17:41:57 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:47:23 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_perso(t_data **data, int y, int x)
 	return (res);
 }
 
-bool	map_close(t_data **data, int *y, int *x, int dep[2])
+bool	map_close(t_data **data, int *y, int *x)
 {
 	int		i;
 	int		pos_x;
@@ -91,15 +91,12 @@ void	check_close(t_data **data)
 {
 	int	y;
 	int	x;
-	int	dep[2];
 
 	y = 1;
 	x = 1;
 	while ((*data)->mapbis[y][x] != '1')
 		x++;
-	dep[0] = y;
-	dep[1] = x;
-	if (map_close(data, &y, &x, dep) == false)
+	if (map_close(data, &y, &x) == false)
 	{
 		ft_putstr_fd("Error map not close\n", 1);
 		exit(1);

@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:08:54 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/10 17:12:41 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:45:32 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ void	ft_extrac_map(int fd, char *buffer, t_data **data)
 {
 	buffer = ft_map_to_buffer(fd, buffer);
 	(*data)->map = split_map(buffer, '\n');
-
 	free(buffer);
 }

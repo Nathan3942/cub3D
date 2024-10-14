@@ -6,69 +6,80 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:02:24 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/10 17:36:51 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:09:12 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../c3d_inc/cub3d.h"
 
-void	move(t_data **data)
+void	mouse_move_left(t_data **data, int x, int y, double sensi)
 {
-	if ((*data)->m_up == true)
+	double	old_dir;
+	double	old_plane;
+	double	rotate_speed;
+
+	(void)y;
+	rotate_speed = (x - (*data)->x_mouse) * sensi;
+	if (x > (*data)->x_mouse)
 	{
-		if ((*data)->map[(int)((*data)->player_y + (*data)->dir_y * 0.2)]
-			[(int)(*data)->player_x] != '1'
-			&& (*data)->map[(int)((*data)->player_y + (*data)->dir_y * 0.2)]
-				[(int)(*data)->player_x] != 'D')
-			(*data)->player_y += (*data)->dir_y * 0.1;
-		if ((*data)->map[(int)((*data)->player_y)]
-			[(int)((*data)->player_x + (*data)->dir_x * 0.2)] != '1'
-			&& (*data)->map[(int)((*data)->player_y)]
-				[(int)((*data)->player_x + (*data)->dir_x * 0.2)] != 'D')
-			(*data)->player_x += (*data)->dir_x * 0.1;
-	}
-	if ((*data)->m_down == true)
-	{
-		if ((*data)->map[(int)((*data)->player_y - (*data)->dir_y * 0.2)]
-			[(int)(*data)->player_x] != '1'
-			&& (*data)->map[(int)((*data)->player_y - (*data)->dir_y * 0.2)]
-				[(int)(*data)->player_x] != 'D')
-			(*data)->player_y -= (*data)->dir_y * 0.1;
-		if ((*data)->map[(int)((*data)->player_y)]
-			[(int)((*data)->player_x - (*data)->dir_x * 0.2)] != '1'
-			&& (*data)->map[(int)((*data)->player_y)]
-				[(int)((*data)->player_x - (*data)->dir_x * 0.2)] != 'D')
-			(*data)->player_x -= (*data)->dir_x * 0.1;
+		old_dir = (*data)->dir_x;
+		(*data)->dir_x = (*data)->dir_x * cos(rotate_speed)
+			- (*data)->dir_y * sin(rotate_speed);
+		(*data)->dir_y = old_dir * sin(rotate_speed)
+			+ (*data)->dir_y * cos(rotate_speed);
+		old_plane = (*data)->plane_x;
+		(*data)->plane_x = (*data)->plane_x * cos(rotate_speed)
+			- (*data)->plane_y * sin(rotate_speed);
+		(*data)->plane_y = old_plane * sin(rotate_speed)
+			+ (*data)->plane_y * cos(rotate_speed);
 	}
 }
 
-void	move_lat(t_data **data)
+int	mouse_move(int x, int y, t_data **data)
 {
-	if ((*data)->m_left == true)
+	double	old_dir;
+	double	old_plane;
+	double	rotate_speed;
+	double	sensi;
+
+	sensi = 0.001;
+	if ((*data)->x_mouse == -1)
+		(*data)->x_mouse = x;
+	rotate_speed = (x - (*data)->x_mouse) * sensi;
+	if (x < (*data)->x_mouse)
 	{
-		if ((*data)->map[(int)((*data)->player_y + (*data)->dir_x * 0.2)]
-			[(int)(*data)->player_x] != '1'
-			&& (*data)->map[(int)((*data)->player_y + (*data)->dir_x * 0.2)]
-				[(int)(*data)->player_x] != 'D')
-			(*data)->player_y += (*data)->dir_x * 0.1;
-		if ((*data)->map[(int)(*data)->player_y]
-			[(int)((*data)->player_x + -(*data)->dir_y * 0.2)] != '1'
-			&& (*data)->map[(int)(*data)->player_y]
-				[(int)((*data)->player_x + -(*data)->dir_y * 0.2)] != 'D')
-			(*data)->player_x += -(*data)->dir_y * 0.1;
+		old_dir = (*data)->dir_x;
+		(*data)->dir_x = (*data)->dir_x * cos(rotate_speed)
+			- (*data)->dir_y * sin(rotate_speed);
+		(*data)->dir_y = old_dir * sin(rotate_speed)
+			+ (*data)->dir_y * cos(rotate_speed);
+		old_plane = (*data)->plane_x;
+		(*data)->plane_x = (*data)->plane_x * cos(rotate_speed)
+			- (*data)->plane_y * sin(rotate_speed);
+		(*data)->plane_y = old_plane * sin(rotate_speed)
+			+ (*data)->plane_y * cos(rotate_speed);
 	}
-	if ((*data)->m_right == true)
+	mouse_move_left(data, x, y, sensi);
+	(*data)->x_mouse = x;
+	return (0);
+}
+
+void	turn_right(t_data **data)
+{
+	double	old_dir;
+	double	old_plane;
+
+	old_dir = 0;
+	old_plane = 0;
+	if ((*data)->t_right == true)
 	{
-		if ((*data)->map[(int)((*data)->player_y - (*data)->dir_x * 0.2)]
-			[(int)(*data)->player_x] != '1'
-			&& (*data)->map[(int)((*data)->player_y - (*data)->dir_x * 0.2)]
-				[(int)(*data)->player_x] != 'D')
-			(*data)->player_y -= (*data)->dir_x * 0.1;
-		if ((*data)->map[(int)(*data)->player_y]
-			[(int)((*data)->player_x - -(*data)->dir_y * 0.2)] != '1'
-			&& (*data)->map[(int)(*data)->player_y]
-				[(int)((*data)->player_x - -(*data)->dir_y * 0.2)] != 'D')
-			(*data)->player_x -= -(*data)->dir_y * 0.1;
+		old_dir = (*data)->dir_x;
+		(*data)->dir_x = (*data)->dir_x * cos(0.1) - (*data)->dir_y * sin(0.1);
+		(*data)->dir_y = old_dir * sin(0.1) + (*data)->dir_y * cos(0.1);
+		old_plane = (*data)->plane_x;
+		(*data)->plane_x = (*data)->plane_x * cos(0.1)
+			- (*data)->plane_y * sin(0.1);
+		(*data)->plane_y = old_plane * sin(0.1) + (*data)->plane_y * cos(0.1);
 	}
 }
 
@@ -90,16 +101,7 @@ void	turn(t_data **data)
 			* cos(-0.1) - (*data)->plane_y * sin(-0.1);
 		(*data)->plane_y = old_plane * sin(-0.1) + (*data)->plane_y * cos(-0.1);
 	}
-	if ((*data)->t_right == true)
-	{
-		old_dir = (*data)->dir_x;
-		(*data)->dir_x = (*data)->dir_x * cos(0.1) - (*data)->dir_y * sin(0.1);
-		(*data)->dir_y = old_dir * sin(0.1) + (*data)->dir_y * cos(0.1);
-		old_plane = (*data)->plane_x;
-		(*data)->plane_x = (*data)->plane_x * cos(0.1)
-			- (*data)->plane_y * sin(0.1);
-		(*data)->plane_y = old_plane * sin(0.1) + (*data)->plane_y * cos(0.1);
-	}
+	turn_right(data);
 }
 
 void	input(t_data **data)
