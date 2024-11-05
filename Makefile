@@ -6,7 +6,7 @@
 #    By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 04:13:09 by ichpakov          #+#    #+#              #
-#    Updated: 2024/10/14 16:24:23 by njeanbou         ###   ########.fr        #
+#    Updated: 2024/11/05 08:25:09 by njeanbou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ HEAD =	c3d_inc/cub3d.h			c3d_inc/c3d_keys.h
 #//////////////////////////////////////////////////////////////////////////////
 
 CC = gcc
-CF = -fsanitize=address -static-libasan -Wall -Werror -Wextra -g
+CF = -fsanitize=address -static-libasan #-Wall -Werror -Wextra -g
 SL = -Imlx -Imlx_linux -lXext -lX11 -lm -lz
 CI = -I ./c3d_inc/
 

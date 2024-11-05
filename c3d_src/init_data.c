@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:30:46 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/14 18:18:54 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/05 08:59:31 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	init_data(char *av, t_data **data, char *buffer)
 	(*data)->mlx_ptr = mlx_init();
 	(*data)->win_ptr = mlx_new_window((*data)->mlx_ptr, W_WIDTH, W_HEIGHT,
 			"Cub3d des gros BOOOOWGOS");
+			(*data)->mini_img1 = NULL;
 	(*data)->txt_north = NULL;
 	(*data)->txt_south = NULL;
 	(*data)->txt_west = NULL;

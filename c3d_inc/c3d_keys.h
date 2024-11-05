@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 04:13:38 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/10/14 16:42:06 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/05 08:26:50 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@
 # define K_RIGHT 124
 
 // Size window & unit
-# define W_HEIGHT 1500
-# define W_WIDTH 2000
+# define W_HEIGHT 1000
+# define W_WIDTH 1500
 # define U_HEIGHT 50
 # define U_WIDTH 50
+# define MINI_MULT 15
 
 #endif

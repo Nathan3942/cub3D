@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 03:24:01 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/10/14 18:17:15 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/05 07:15:56 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,16 @@ typedef struct s_data
 	int				endian;
 	int				index_img;
 
+	//minimap
+	void			*mini_img1;
+	void			*mini_img2;
+	char			*mini_addr;
+	int				mini_bite_per_pixel;
+	int				mini_size_line;
+	int				mini_endian;
+
+	
+
 	//input
 	bool			m_left;
 	bool			m_right;
@@ -151,6 +161,10 @@ void	move(t_data **data);
 void	move_lat(t_data **data);
 int		mouse_move(int x, int y, t_data **data);
 void	door(t_data **data);
+
+//mini map
+void    mini_render(t_data **data);
+void	 render_raycast(t_data **data);
 
 // test
 void	print_para(t_data *data);
