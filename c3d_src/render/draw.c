@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:00:45 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/14 17:13:02 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:06:40 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	draw_ceiling(t_data **data, t_raycast **ray, int x)
 {

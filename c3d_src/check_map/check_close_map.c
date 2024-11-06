@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:18:33 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/14 16:47:23 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:05:20 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 int	check_border(char **mapbis, int y, int x, int i)
 {

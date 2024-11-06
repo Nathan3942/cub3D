@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:02:05 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/14 17:06:11 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:05:37 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	close_door(t_data **data)
 {

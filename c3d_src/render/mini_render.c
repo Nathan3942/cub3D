@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 05:46:04 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/05 08:32:05 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:48:10 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	put_pixel(t_data **data, int x, int y, int color)
 {
@@ -34,28 +34,17 @@ void    render_cart(t_data **data)
 		x = 0;
 		while (x < ((*data)->m_wid * MINI_MULT))
 		{
-			if ((*data)->map[(int)((double)y / MINI_MULT)][(int)((double)x / MINI_MULT)] == '1')
+			if ((*data)->map[(int)(y / MINI_MULT)][(int)(x / MINI_MULT)] == '1')
 				put_pixel(data, x, y, 0xFFFFFF);
-			if ((*data)->map[(int)((double)y / MINI_MULT)][(int)((double)x / MINI_MULT)] == 'D')
+			if ((*data)->map[(int)(y / MINI_MULT)][(int)(x / MINI_MULT)] == 'D')
 				put_pixel(data, x, y, 0x808080);
+			if ((*data)->map[(int)(y / MINI_MULT)][(int)(x / MINI_MULT)] == 'C')
+				put_pixel(data, x, y, 0xC0C0C0);
 			x++;
 		}
 		y++;
 	}
 }
-
-// void	put_player(t_data **data, int x, int y)
-// {
-// 	int	color;
-// 	int	pixel_index;
-
-// 	color = 0x00FF0000;
-// 	pixel_index = (y * (*data)->mini_size_line) + (x * ((*data)->mini_bite_per_pixel / 8));
-// 	(*data)->mini_addr[pixel_index] = color & 0xFF;
-// 	(*data)->mini_addr[pixel_index + 1] = (color >> 8) & 0xFF;
-// 	(*data)->mini_addr[pixel_index + 2] = (color >> 16) & 0xFF;
-// }
-
 
 void	render_player(t_data **data)
 {
@@ -82,7 +71,6 @@ void	render_player(t_data **data)
 		p_y++;
 	}
 }
-
 
 void    mini_render(t_data **data)
 {

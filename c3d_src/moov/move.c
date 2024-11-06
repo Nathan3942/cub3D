@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:02:24 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/14 17:09:12 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:05:45 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	mouse_move_left(t_data **data, int x, int y, double sensi)
 {

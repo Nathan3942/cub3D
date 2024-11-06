@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 02:05:22 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/05 09:29:22 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:07:26 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	ray_cast(t_data **data)
 {

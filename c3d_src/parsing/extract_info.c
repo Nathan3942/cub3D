@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:12:03 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/14 17:43:45 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:05:55 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	extract_color(t_data **data, char **buf)
 {

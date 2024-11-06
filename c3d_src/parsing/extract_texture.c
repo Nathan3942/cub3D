@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:39:11 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/14 17:45:04 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:06:05 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	extract_south(t_data **data, char **buf)
 {

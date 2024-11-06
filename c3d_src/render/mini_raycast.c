@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 07:03:59 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/05 08:21:27 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:06:46 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	r_put_pixel(t_data **data, int x, int y, int color)
 {

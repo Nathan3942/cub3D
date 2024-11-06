@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:56:22 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/10 17:03:37 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:05:50 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	set_dir_bis(t_data **data, char c)
 {

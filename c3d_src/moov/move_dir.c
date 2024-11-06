@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:27:20 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/14 16:46:28 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:05:40 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	move_down(t_data **data)
 {

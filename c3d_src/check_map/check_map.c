@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:55:41 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/10/10 17:18:48 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:05:18 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../c3d_inc/cub3d.h"
+#include "../../c3d_inc/cub3d.h"
 
 void	check_cub(char *av)
 {
