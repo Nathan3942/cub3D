@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 07:03:59 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/06 17:06:46 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/07 21:02:45 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	r_put_pixel(t_data **data, int x, int y, int color)
 {
 	int	pixel_index;
 
-	pixel_index = (y * (*data)->mini_size_line) + (x * ((*data)->mini_bite_per_pixel / 8));
-	(*data)->mini_addr[pixel_index] = color & 0xFF;
-	(*data)->mini_addr[pixel_index + 1] = (color >> 8) & 0xFF;
-	(*data)->mini_addr[pixel_index + 2] = (color >> 16) & 0xFF;
+	pixel_index = (y * (*data)->size_line) + (x * ((*data)->bite_per_pixel / 8));
+	(*data)->mlx_address[pixel_index] = color & 0xFF;
+	(*data)->mlx_address[pixel_index + 1] = (color >> 8) & 0xFF;
+	(*data)->mlx_address[pixel_index + 2] = (color >> 16) & 0xFF;
 }
 
 int	r_init_ray(t_data **data, t_raycast **ray, int x)
@@ -50,7 +50,7 @@ void	r_hit_wall(t_data **data, t_raycast **ray)
 			break;
 		int mini_x = (int)(ray_x * MINI_MULT);
 		int mini_y = (int)(ray_y * MINI_MULT);
-		r_put_pixel(data, mini_x, mini_y, 0x00FFAA);
+		r_put_pixel(data, mini_x + 10, mini_y + 10, 0x00FFAA);
 		ray_x += (*ray)->ray_dir_x * step_size;
 		ray_y += (*ray)->ray_dir_y * step_size;
 	}

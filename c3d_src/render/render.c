@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 02:05:22 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/06 17:07:26 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/07 20:35:51 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	setup_img(t_data **data)
 		(*data)->mlx_address = mlx_get_data_addr((*data)->img_ptr1,
 				&(*data)->bite_per_pixel, &(*data)->size_line,
 				&(*data)->endian);
-		(*data)->mini_img1 = mlx_new_image((*data)->mlx_ptr, (*data)->m_wid * MINI_MULT, (*data)->m_hei * MINI_MULT);
-		(*data)->mini_addr = mlx_get_data_addr((*data)->mini_img1, &(*data)->mini_bite_per_pixel, &(*data)->mini_size_line, &(*data)->mini_endian);
+		// (*data)->mini_img1 = mlx_new_image((*data)->mlx_ptr, (*data)->m_wid * MINI_MULT, (*data)->m_hei * MINI_MULT);
+		// (*data)->mini_addr = mlx_get_data_addr((*data)->mini_img1, &(*data)->mini_bite_per_pixel, &(*data)->mini_size_line, &(*data)->mini_endian);
 	}
 	else
 	{
@@ -52,8 +52,8 @@ void	setup_img(t_data **data)
 		(*data)->mlx_address = mlx_get_data_addr((*data)->img_ptr2,
 				&(*data)->bite_per_pixel, &(*data)->size_line,
 				&(*data)->endian);
-		(*data)->mini_img2 = mlx_new_image((*data)->mlx_ptr, (*data)->m_wid * MINI_MULT, (*data)->m_hei * MINI_MULT);
-		(*data)->mini_addr = mlx_get_data_addr((*data)->mini_img2, &(*data)->mini_bite_per_pixel, &(*data)->mini_size_line, &(*data)->mini_endian);
+		// (*data)->mini_img2 = mlx_new_image((*data)->mlx_ptr, (*data)->m_wid * MINI_MULT, (*data)->m_hei * MINI_MULT);
+		// (*data)->mini_addr = mlx_get_data_addr((*data)->mini_img2, &(*data)->mini_bite_per_pixel, &(*data)->mini_size_line, &(*data)->mini_endian);
 	}
 }
 
@@ -61,17 +61,17 @@ void	render(t_data **data)
 {
 	input(data);
 	setup_img(data);
-	mini_render(data);
 	ray_cast(data);
+	mini_render(data);
 	if ((*data)->index_img == 0 || (*data)->index_img == 3)
 	{
 		mlx_put_image_to_window((*data)->mlx_ptr,
 			(*data)->win_ptr, (*data)->img_ptr1, 0, 0);
-		mlx_put_image_to_window((*data)->mlx_ptr, (*data)->win_ptr, (*data)->mini_img1, 10, 10);
+		//mlx_put_image_to_window((*data)->mlx_ptr, (*data)->win_ptr, (*data)->mini_img1, 10, 10);
 		if ((*data)->index_img == 0)
 		{
 			mlx_destroy_image((*data)->mlx_ptr, (*data)->img_ptr2);
-			mlx_destroy_image((*data)->mlx_ptr, (*data)->mini_img2);
+			//mlx_destroy_image((*data)->mlx_ptr, (*data)->mini_img2);
 		}
 		(*data)->index_img = 1;
 	}
@@ -79,9 +79,9 @@ void	render(t_data **data)
 	{
 		mlx_put_image_to_window((*data)->mlx_ptr,
 			(*data)->win_ptr, (*data)->img_ptr2, 0, 0);
-		mlx_put_image_to_window((*data)->mlx_ptr, (*data)->win_ptr, (*data)->mini_img2, 10, 10);
+		//mlx_put_image_to_window((*data)->mlx_ptr, (*data)->win_ptr, (*data)->mini_img2, 10, 10);
 		mlx_destroy_image((*data)->mlx_ptr, (*data)->img_ptr1);
-		mlx_destroy_image((*data)->mlx_ptr, (*data)->mini_img1);
+		//mlx_destroy_image((*data)->mlx_ptr, (*data)->mini_img1);
 		(*data)->index_img = 0;
 	}
 }
