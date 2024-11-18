@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 03:24:01 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/11/06 17:11:05 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:41:21 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,6 @@ typedef struct s_data
 	int				endian;
 	int				index_img;
 
-	//minimap
-	void			*mini_img1;
-	void			*mini_img2;
-	char			*mini_addr;
-	int				mini_bite_per_pixel;
-	int				mini_size_line;
-	int				mini_endian;
-
-	
-
 	//input
 	bool			m_left;
 	bool			m_right;
@@ -152,8 +142,14 @@ char	**split_map(char *buffer, char c);
 void	calculate_pos_player(t_data **data);
 void	ft_extrac_map(int fd, char *buffer, t_data **data);
 void	extract_info(t_data **data, char *av, char *buffer);
-void	extract_texture(t_data **data, char **buf);
-void	extract_color(t_data **data, char **buf);
+void	extract_texture(t_data **data, char **buf, int (*nb_txt)[2]);
+void	extract_north(t_data **data, char **buf, int (*nb_txt)[2]);
+void	extract_south(t_data **data, char **buf, int (*nb_txt)[2]);
+void	extract_east(t_data **data, char **buf, int (*nb_txt)[2]);
+void	extract_west(t_data **data, char **buf, int (*nb_txt)[2]);
+void	extract_door(t_data **data, char **buf, int (*nb_txt)[2]);
+void	extract_color(t_data **data, char **buf, int (*nb_txt)[2]);
+void	copymap(t_data **data);
 
 //move
 void	input(t_data **data);

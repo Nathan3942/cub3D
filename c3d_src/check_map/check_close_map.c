@@ -2,11 +2,9 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   check_close_map.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+ +#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:18:33 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/06 17:05:20 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:10:52 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +96,7 @@ void	check_close(t_data **data)
 		x++;
 	if (map_close(data, &y, &x) == false)
 	{
-		ft_putstr_fd("Error map not close\n", 1);
+		ft_putstr_fd("Error in map!\n", 1);
 		exit(1);
 	}
 }

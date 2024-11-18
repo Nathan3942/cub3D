@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:56:22 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/06 17:05:50 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:08:35 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	set_dir(t_data **data, char c)
 
 void	calculate_pos_player(t_data **data)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
 
 	y = 0;
 	while ((*data)->map[y] != NULL)
@@ -70,5 +70,10 @@ void	calculate_pos_player(t_data **data)
 			x++;
 		}
 		y++;
+	}
+	if ((*data)->player_x == -1)
+	{
+		ft_putendl_fd("Any player in map!", 1);
+		exit(1);
 	}
 }
