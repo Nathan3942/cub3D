@@ -1,13 +1,14 @@
-   WE                            ./textures/cobel.xpm
-   NO      ./textures/cobel.xpm
+WE                            ./textures/wall_west.xpm
+NO      ./textures/wall_north.xpm
 
 
 
-SO ./textures/cobel.xpm
+SO ./textures/wall_south.xpm
 
 F      17,    38,     64
 
-EA ./textures/cobel.xpm
+EA ./textures/wall_east.xpm
+DO ./textures/door.xpm
 
 
 

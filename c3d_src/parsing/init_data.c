@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:30:46 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/18 19:48:13 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:24:15 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	calculate_window(t_data **data)
 	y = 0;
 	x_tmp = 0;
 	if ((*data)->map == NULL)
-	{
-		ft_putendl_fd("Error no map!", 1);
-		exit(1);
-	}
+		c_error("No map!");
 	while ((*data)->map[y] != NULL)
 	{
 		x = 0;
@@ -59,17 +56,31 @@ void	set_value(t_data **data)
 	(*data)->player_x = -1;
 }
 
+void	calculate_mini_mult(t_data **data)
+{
+	int	biger;
+	int	mult;
+
+	mult = 25;
+	if ((*data)->m_wid > (*data)->m_hei)
+		biger = (*data)->m_wid;
+	else
+		biger = (*data)->m_hei;
+	while (biger * mult > W_WIDTH * 0.4)
+		mult--;
+	(*data)->m_mult = mult;
+}
+
 void	init_data(char *av, t_data **data, char *buffer)
 {
 	check_cub(av);
+	set_value(data);
 	(*data)->mlx_ptr = mlx_init();
 	(*data)->win_ptr = mlx_new_window((*data)->mlx_ptr, W_WIDTH, W_HEIGHT,
 			"Cub3d des gros BOOOOWGOS");
-	set_value(data);
 	extract_info(data, av, buffer);
-	if ((*data)->txt_north == NULL)
-		error("Empty file\n");
 	calculate_window(data);
 	calculate_pos_player(data);
+	calculate_mini_mult(data);
 	copymap(data);
 }

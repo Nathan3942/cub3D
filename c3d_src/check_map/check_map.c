@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:55:41 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/06 17:05:18 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/19 11:44:36 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,10 @@ void	check_cub(char *av)
 
 	len = ft_strlen(av);
 	if (len < 5)
-	{
-		ft_putstr_fd("Error .cub\n", 1);
-		exit(1);
-	}
+		c_error("Not a .cub!");
 	if (av[len - 1] != 'b' || av[len - 2] != 'u' || av[len - 3] != 'c'
 		|| av[len - 4] != '.')
-	{
-		ft_putstr_fd("Error .cub\n", 1);
-		exit(1);
-	}
+		c_error("Not a .cub!");
 }
 
 void	check_char(t_data **data)
@@ -46,10 +40,7 @@ void	check_char(t_data **data)
 				&& (*data)->map[y][x] != 'E' && (*data)->map[y][x] != 'W'
 				&& (*data)->map[y][x] != '\n' && (*data)->map[y][x] != ' '
 				&& (*data)->map[y][x] != 'D')
-			{
-				ft_putstr_fd("Error wrong char in map\n", 1);
-				exit(1);
-			}
+				c_error("Bad char in map!");
 			x++;
 		}
 		y++;

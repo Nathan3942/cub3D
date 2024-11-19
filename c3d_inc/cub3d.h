@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 03:24:01 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/11/18 19:41:21 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:57:15 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ typedef struct s_texture
 
 typedef struct s_data
 {
-	//mlx
 	void			*mlx_ptr;
 	void			*win_ptr;
 	char			*mlx_address;
-	//texture
+
 	t_texture		*txt_north;
 	t_texture		*txt_south;
 	t_texture		*txt_west;
@@ -50,7 +49,7 @@ typedef struct s_data
 	t_texture		*txt_door;
 	unsigned int	txt_ground;
 	unsigned int	txt_ceiling;
-	//minimap
+
 	void			*mini_map;
 	char			*mini_data;
 	int				mini_w;
@@ -59,12 +58,11 @@ typedef struct s_data
 	int				m_size_line;
 	int				m_endian;
 
-	//map
 	char			**map;
 	char			**mapbis;
 	int				m_wid;
 	int				m_hei;
-	//state
+
 	int				w_hei;
 	int				w_wid;
 	int				hei;
@@ -75,7 +73,7 @@ typedef struct s_data
 	double			dir_y;
 	double			plane_x;
 	double			plane_y;
-	//image
+
 	void			*img_ptr1;
 	void			*img_ptr2;
 	int				bite_per_pixel;
@@ -83,7 +81,7 @@ typedef struct s_data
 	int				endian;
 	int				index_img;
 
-	//input
+	int				m_mult;
 	bool			m_left;
 	bool			m_right;
 	bool			m_up;
@@ -159,8 +157,8 @@ int		mouse_move(int x, int y, t_data **data);
 void	door(t_data **data);
 
 //mini map
-void    mini_render(t_data **data);
-void	 render_raycast(t_data **data);
+void	mini_render(t_data **data);
+void	render_raycast(t_data **data);
 
 // test
 void	print_para(t_data *data);
@@ -172,6 +170,7 @@ void	error(char *str);
 
 //utils
 char	first_num(char *buffer);
+void	c_error(char *str);
 
 //check_map
 void	check_cub(char *av);

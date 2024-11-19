@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:12:03 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/18 19:50:36 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/19 11:34:25 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	extract_color(t_data **data, char **buf, int (*nb_txt)[2])
 	if (ft_strequal(buf[0], "F") == 0)
 	{
 		rgb = ft_split(buf[1], ',');
+		if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
+			c_error("Bad link color!");
 		(*data)->txt_ground = (ft_atoi(rgb[0]) << 16) + (ft_atoi(rgb[1]) << 8)
 			+ ft_atoi(rgb[2]);
 		(*nb_txt)[1]++;
@@ -27,6 +29,8 @@ void	extract_color(t_data **data, char **buf, int (*nb_txt)[2])
 	else if (ft_strequal(buf[0], "C") == 0)
 	{
 		rgb = ft_split(buf[1], ',');
+		if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
+			c_error("Bad link color!");
 		(*data)->txt_ceiling = (ft_atoi(rgb[0]) << 16) + (ft_atoi(rgb[1]) << 8)
 			+ ft_atoi(rgb[2]);
 		(*nb_txt)[1]++;
@@ -52,10 +56,7 @@ void	setup_extract(t_data **data, char *av, char *buffer, int (*nb_txt)[2])
 
 	fd = open(av, O_RDONLY);
 	if (fd < 0)
-	{
-		ft_putstr_fd("Error : file does not exist\n", 1);
-		exit(1);
-	}
+		c_error("File does not exist!");
 	buffer = gnl(fd, buffer);
 	buf = ft_split_link(buffer, ' ');
 	while (buffer != NULL && ft_isdigit(first_num(buffer)) != 1)
@@ -82,13 +83,7 @@ void	extract_info(t_data **data, char *av, char *buffer)
 	nb_txt[1] = 0;
 	setup_extract(data, av, buffer, &nb_txt);
 	if (nb_txt[0] != 5)
-	{
-		ft_putendl_fd("Error missing texture!", 1);
-		exit(1);
-	}
+		c_error("Missing texture!");
 	if (nb_txt[1] != 2)
-	{
-		ft_putendl_fd("Error missing color!", 1);
-		exit(1);
-	}
+		c_error("Missing color!");
 }

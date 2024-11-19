@@ -2,9 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   check_close_map.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+ +#+#+#+   +#+           */
-/*   Created: 2024/10/10 17:18:33 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/18 16:10:52 by njeanbou         ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/19 11:46:11 by njeanbou          #+#    #+#             */
+/*   Updated: 2024/11/19 13:59:13 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +96,9 @@ void	check_close(t_data **data)
 	x = 1;
 	while ((*data)->mapbis[y][x] != '1')
 		x++;
+	while ((*data)->mapbis[y][x] == '1' && ((*data)->mapbis[y][x + 1] != '1'
+		|| (*data)->mapbis[y + 1][x] != '1'))
+		x++;
 	if (map_close(data, &y, &x) == false)
-	{
-		ft_putstr_fd("Error in map!\n", 1);
-		exit(1);
-	}
+		c_error("Map not closed!");
 }

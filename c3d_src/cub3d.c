@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 04:13:38 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/11/05 08:49:02 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:34:09 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	key_hook(int keycode, t_data **data)
 		(*data)->m_left = true;
 	if (keycode == 97)
 		(*data)->m_right = true;
-	if (keycode == 113)
+	if (keycode == 65361)
 		(*data)->t_left = true;
-	if (keycode == 101)
+	if (keycode == 65363)
 		(*data)->t_right = true;
 	return (0);
 }
@@ -47,14 +47,13 @@ int	key_release(int keycode, t_data **data)
 		(*data)->m_left = false;
 	if (keycode == 97)
 		(*data)->m_right = false;
-	if (keycode == 113)
+	if (keycode == 65361)
 		(*data)->t_left = false;
-	if (keycode == 101)
+	if (keycode == 65363)
 		(*data)->t_right = false;
 	return (0);
 }
 
-//Exit avec la croix de la window
 int	exit_1(t_data **data)
 {
 	ft_putstr_fd("EXIT\n", 1);
@@ -72,7 +71,6 @@ int	main(int ac, char **av)
 	data = (t_data *)malloc(sizeof(t_data));
 	init_data(av[1], &data, buffer);
 	check_map(&data);
-	print_para(data);
 	mlx_loop_hook(data->mlx_ptr, (void *)render, &data);
 	mlx_hook(data->win_ptr, 17, 0, exit_1, &data);
 	mlx_hook(data->win_ptr, 2, 1L << 0, key_hook, &data);

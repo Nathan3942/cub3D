@@ -6,12 +6,12 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 04:13:38 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/11/05 08:26:50 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:57:24 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SL_KEYS_H
-# define SL_KEYS_H
+#ifndef C3D_KEYS_H
+# define C3D_KEYS_H
 
 // Keyboard
 // A S D W
@@ -32,10 +32,10 @@
 # define K_RIGHT 124
 
 // Size window & unit
-# define W_HEIGHT 1000
-# define W_WIDTH 1500
+# define W_HEIGHT 1200
+# define W_WIDTH 1600
 # define U_HEIGHT 50
 # define U_WIDTH 50
-# define MINI_MULT 15
+# define MINI_MULT 10
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:56:22 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/18 16:08:35 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:18:27 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	calculate_pos_player(t_data **data)
 {
 	int		y;
 	int		x;
+	int		nb_player;
 
+	nb_player = 0;
 	y = 0;
 	while ((*data)->map[y] != NULL)
 	{
@@ -66,14 +68,12 @@ void	calculate_pos_player(t_data **data)
 				(*data)->player_x = (double)x + 0.5;
 				(*data)->player_y = (double)y + 0.5;
 				set_dir(data, (*data)->map[y][x]);
+				nb_player++;
 			}
 			x++;
 		}
 		y++;
 	}
-	if ((*data)->player_x == -1)
-	{
-		ft_putendl_fd("Any player in map!", 1);
-		exit(1);
-	}
+	if ((*data)->player_x == -1 || nb_player != 1)
+		c_error("No or to many player in map!");
 }

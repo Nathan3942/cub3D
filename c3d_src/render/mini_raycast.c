@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 07:03:59 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/07 21:02:45 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:17:40 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	r_put_pixel(t_data **data, int x, int y, int color)
 {
 	int	pixel_index;
 
-	pixel_index = (y * (*data)->size_line) + (x * ((*data)->bite_per_pixel / 8));
+	pixel_index = (y * (*data)->size_line)
+		+ (x * ((*data)->bite_per_pixel / 8));
 	(*data)->mlx_address[pixel_index] = color & 0xFF;
 	(*data)->mlx_address[pixel_index + 1] = (color >> 8) & 0xFF;
 	(*data)->mlx_address[pixel_index + 2] = (color >> 16) & 0xFF;
@@ -46,17 +47,17 @@ void	r_hit_wall(t_data **data, t_raycast **ray)
 	{
 		(*ray)->map_x = (int)ray_x;
 		(*ray)->map_y = (int)ray_y;
-		if ((*data)->map[(*ray)->map_y][(*ray)->map_x] == '1' || (*data)->map[(*ray)->map_y][(*ray)->map_x] == 'D')
-			break;
-		int mini_x = (int)(ray_x * MINI_MULT);
-		int mini_y = (int)(ray_y * MINI_MULT);
-		r_put_pixel(data, mini_x + 10, mini_y + 10, 0x00FFAA);
+		if ((*data)->map[(*ray)->map_y][(*ray)->map_x] == '1'
+			|| (*data)->map[(*ray)->map_y][(*ray)->map_x] == 'D')
+			break ;
+		r_put_pixel(data, (int)(ray_x * (*data)->m_mult) + 10,
+			(int)(ray_y * (*data)->m_mult) + 10, 0x00FFAA);
 		ray_x += (*ray)->ray_dir_x * step_size;
 		ray_y += (*ray)->ray_dir_y * step_size;
 	}
 }
 
-void	 render_raycast(t_data **data)
+void	render_raycast(t_data **data)
 {
 	int			x;
 	t_raycast	*ray;
