@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 03:24:01 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/11/19 16:13:37 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:20:15 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,11 @@ void	error(char *str);
 
 //utils
 char	first_num(char *buffer);
-void	c_error(char *str);
+void	c_error(char *str, t_data **data);
+void	c_error_cub(char *str, t_data **data);
 
 //check_map
-void	check_cub(char *av);
+void	check_cub(char *av, t_data **data);
 void	check_map(t_data **data);
 void	check_close(t_data **data);
 

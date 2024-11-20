@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 02:28:39 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/19 11:28:22 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:37:33 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,17 @@ char	first_num(char *buffer)
 	return (buffer[i]);
 }
 
-void	c_error(char *str)
+void	c_error(char *str, t_data **data)
 {
+	free_all(data);
+	ft_putendl_fd("Error", 1);
+	ft_putendl_fd(str, 1);
+	exit(1);
+}
+
+void	c_error_cub(char *str, t_data **data)
+{
+	free(*data);
 	ft_putendl_fd("Error", 1);
 	ft_putendl_fd(str, 1);
 	exit(1);

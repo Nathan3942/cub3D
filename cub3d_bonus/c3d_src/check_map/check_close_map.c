@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:46:11 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/19 13:59:13 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:37:10 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ void	check_close(t_data **data)
 		|| (*data)->mapbis[y + 1][x] != '1'))
 		x++;
 	if (map_close(data, &y, &x) == false)
-		c_error("Map not closed!");
+		c_error("Map not closed!", data);
 }

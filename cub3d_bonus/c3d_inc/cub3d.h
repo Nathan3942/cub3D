@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 03:24:01 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/11/19 16:20:12 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:36:43 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,6 @@ void	door(t_data **data);
 void	mini_render(t_data **data);
 void	render_raycast(t_data **data);
 
-// test
-void	print_para(t_data *data);
-
 //free
 void	ft_free_tab(char **tab);
 void	free_all(t_data **data);
@@ -160,14 +157,13 @@ void	error(char *str);
 
 //utils
 char	first_num(char *buffer);
-void	c_error(char *str);
+void	c_error(char *str, t_data **data);
+void	c_error_cub(char *str, t_data **data);
 
 //check_map
-void	check_cub(char *av);
+void	check_cub(char *av, t_data **data);
 void	check_map(t_data **data);
 void	check_close(t_data **data);
 
-//mini_map
-void	mini_map(t_data **data);
 
 #endif

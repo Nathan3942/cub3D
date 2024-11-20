@@ -6,22 +6,22 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:55:41 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/19 11:44:36 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:38:30 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../c3d_inc/cub3d.h"
 
-void	check_cub(char *av)
+void	check_cub(char *av, t_data **data)
 {
 	int	len;
 
 	len = ft_strlen(av);
 	if (len < 5)
-		c_error("Not a .cub!");
+		c_error_cub("Not a .cub!", data);
 	if (av[len - 1] != 'b' || av[len - 2] != 'u' || av[len - 3] != 'c'
 		|| av[len - 4] != '.')
-		c_error("Not a .cub!");
+		c_error_cub("Not a .cub!", data);
 }
 
 void	check_char(t_data **data)
@@ -40,7 +40,7 @@ void	check_char(t_data **data)
 				&& (*data)->map[y][x] != 'E' && (*data)->map[y][x] != 'W'
 				&& (*data)->map[y][x] != '\n' && (*data)->map[y][x] != ' '
 				&& (*data)->map[y][x] != 'D')
-				c_error("Bad char in map!");
+				c_error("Bad char in map!", data);
 			x++;
 		}
 		y++;

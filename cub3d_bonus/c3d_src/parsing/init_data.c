@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:30:46 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/19 13:24:15 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:40:16 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	calculate_window(t_data **data)
 	y = 0;
 	x_tmp = 0;
 	if ((*data)->map == NULL)
-		c_error("No map!");
+		c_error("No map!", data);
 	while ((*data)->map[y] != NULL)
 	{
 		x = 0;
@@ -38,6 +38,7 @@ void	calculate_window(t_data **data)
 void	set_value(t_data **data)
 {
 	(*data)->map = NULL;
+	(*data)->mapbis = NULL;
 	(*data)->txt_north = NULL;
 	(*data)->txt_south = NULL;
 	(*data)->txt_west = NULL;
@@ -73,8 +74,8 @@ void	calculate_mini_mult(t_data **data)
 
 void	init_data(char *av, t_data **data, char *buffer)
 {
-	check_cub(av);
 	set_value(data);
+	check_cub(av, data);
 	(*data)->mlx_ptr = mlx_init();
 	(*data)->win_ptr = mlx_new_window((*data)->mlx_ptr, W_WIDTH, W_HEIGHT,
 			"Cub3d des gros BOOOOWGOS");

@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:56:22 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/19 12:18:27 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:43:50 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ void	calculate_pos_player(t_data **data)
 		y++;
 	}
 	if ((*data)->player_x == -1 || nb_player != 1)
-		c_error("No or to many player in map!");
+		c_error("No or to many player in map!", data);
 }

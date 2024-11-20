@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:29:31 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/18 15:41:48 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:34:08 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,31 @@ void	error(char *str)
 
 void	free_other(t_data **data)
 {
-	if ((*data)->txt_east)
+	if ((*data)->txt_east != NULL)
 	{
-		mlx_destroy_image((*data)->mlx_ptr, (*data)->txt_east->txt_img);
+		if ((*data)->txt_east->txt_img)
+			mlx_destroy_image((*data)->mlx_ptr, (*data)->txt_east->txt_img);
 		free((*data)->txt_east);
 	}
-	if ((*data)->txt_west)
+	if ((*data)->txt_west != NULL)
 	{
-		mlx_destroy_image((*data)->mlx_ptr, (*data)->txt_west->txt_img);
+		if ((*data)->txt_west->txt_img)
+			mlx_destroy_image((*data)->mlx_ptr, (*data)->txt_west->txt_img);
 		free((*data)->txt_west);
 	}
-	if ((*data)->txt_door)
+	if ((*data)->txt_door != NULL)
 	{
-		mlx_destroy_image((*data)->mlx_ptr, (*data)->txt_door->txt_img);
+		if ((*data)->txt_door->txt_img)
+			mlx_destroy_image((*data)->mlx_ptr, (*data)->txt_door->txt_img);
 		free((*data)->txt_door);
 	}
 }
 
 void	free_img(t_data **data)
 {
-	if (((*data)->index_img == 0 || (*data)->index_img == 3)
-		&& (*data)->img_ptr2)
+	if ((*data)->index_img == 3)
+		return ;
+	if (((*data)->index_img == 0) && (*data)->img_ptr2)
 		mlx_destroy_image((*data)->mlx_ptr, (*data)->img_ptr2);
 	else
 		mlx_destroy_image((*data)->mlx_ptr, (*data)->img_ptr1);
@@ -48,22 +52,27 @@ void	free_img(t_data **data)
 
 void	free_all(t_data **data)
 {
-	if ((*data)->map)
+	if ((*data)->map != NULL)
 		ft_free_tab((*data)->map);
-	if ((*data)->mapbis)
+	if ((*data)->mapbis != NULL)
 		ft_free_tab((*data)->mapbis);
-	if ((*data)->txt_north)
+	if ((*data)->txt_north != NULL)
 	{
-		mlx_destroy_image((*data)->mlx_ptr, (*data)->txt_north->txt_img);
+		if ((*data)->txt_north->txt_img)
+			mlx_destroy_image((*data)->mlx_ptr, (*data)->txt_north->txt_img);
 		free((*data)->txt_north);
 	}
-	if ((*data)->txt_south)
+	if ((*data)->txt_south != NULL)
 	{
-		mlx_destroy_image((*data)->mlx_ptr, (*data)->txt_south->txt_img);
+		if ((*data)->txt_south->txt_img)
+			mlx_destroy_image((*data)->mlx_ptr, (*data)->txt_south->txt_img);
 		free((*data)->txt_south);
 	}
 	free_other(data);
 	free_img(data);
+	mlx_destroy_window((*data)->mlx_ptr, (*data)->win_ptr);
+	mlx_destroy_display((*data)->mlx_ptr);
+	free((*data)->mlx_ptr);
 	free((*data));
 }
 
