@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 00:43:14 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/11/19 14:03:21 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:25:21 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	**ft_split(char const *s, char c)
 	unsigned int	num_words;
 
 	if (!s)
-		return (0);
+		return (NULL);
 	num_words = ft_count_words(s, c);
 	dest = (char **)malloc(sizeof(char *) * (num_words + 1));
 	if (!dest)

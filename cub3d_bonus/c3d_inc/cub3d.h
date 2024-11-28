@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 03:24:01 by ichpakov          #+#    #+#             */
-/*   Updated: 2024/11/20 17:36:43 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:36:52 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,5 @@ void	c_error_cub(char *str, t_data **data);
 void	check_cub(char *av, t_data **data);
 void	check_map(t_data **data);
 void	check_close(t_data **data);
-
 
 #endif

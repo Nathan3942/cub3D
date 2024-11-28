@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:39:11 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/20 17:41:10 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:15:45 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	extract_north(t_data **data, char **buf, int (*nb_txt)[2])
 {
-	if (ft_strequal(buf[0], "NO") == 0)
+	if (ft_strequal(buf[0], "NO") == 0 && buf[1] != NULL)
 	{
 		(*data)->txt_north = (t_texture *)malloc (sizeof(t_texture));
 		(*data)->txt_north->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr,
@@ -33,7 +33,7 @@ void	extract_north(t_data **data, char **buf, int (*nb_txt)[2])
 
 void	extract_south(t_data **data, char **buf, int (*nb_txt)[2])
 {
-	if (ft_strequal(buf[0], "SO") == 0)
+	if (ft_strequal(buf[0], "SO") == 0 && buf[1] != NULL)
 	{
 		(*data)->txt_south = (t_texture *)malloc (sizeof(t_texture));
 		(*data)->txt_south->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr,
@@ -52,7 +52,7 @@ void	extract_south(t_data **data, char **buf, int (*nb_txt)[2])
 
 void	extract_east(t_data **data, char **buf, int (*nb_txt)[2])
 {
-	if (ft_strequal(buf[0], "EA") == 0)
+	if (ft_strequal(buf[0], "EA") == 0 && buf[1] != NULL)
 	{
 		(*data)->txt_east = (t_texture *)malloc (sizeof(t_texture));
 		(*data)->txt_east->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr,
@@ -71,7 +71,7 @@ void	extract_east(t_data **data, char **buf, int (*nb_txt)[2])
 
 void	extract_west(t_data **data, char **buf, int (*nb_txt)[2])
 {
-	if (ft_strequal(buf[0], "WE") == 0)
+	if (ft_strequal(buf[0], "WE") == 0 && buf[1] != NULL)
 	{
 		(*data)->txt_west = (t_texture *)malloc (sizeof(t_texture));
 		(*data)->txt_west->txt_img = mlx_xpm_file_to_image((*data)->mlx_ptr,

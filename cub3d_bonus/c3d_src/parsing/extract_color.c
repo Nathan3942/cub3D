@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:14:41 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/20 17:42:38 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:45:12 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	extract_floor(t_data **data, char **buf,
 		int (*nb_txt)[2], char **rgb)
 {
 	rgb = ft_split(buf[1], ',');
-	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
+	if (!rgb || rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
 	{
 		ft_free_tab(rgb);
 		ft_free_tab(buf);
@@ -41,7 +41,7 @@ void	extract_color(t_data **data, char **buf, int (*nb_txt)[2])
 	else if (ft_strequal(buf[0], "C") == 0)
 	{
 		rgb = ft_split(buf[1], ',');
-		if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
+		if (!rgb || rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
 		{
 			ft_free_tab(rgb);
 			ft_free_tab(buf);

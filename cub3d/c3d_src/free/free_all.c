@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:29:31 by njeanbou          #+#    #+#             */
-/*   Updated: 2024/11/20 17:27:54 by njeanbou         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:35:41 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	if (tab == NULL || tab[0] == NULL)
+	if (tab == NULL)
 		return ;
 	while (tab[i] != NULL)
 	{
